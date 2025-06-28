@@ -5,14 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>清华大学怀化溆浦乡村振兴工作站</title>
   <style>
+    /* 清华紫配色方案 */
+    :root {
+      --thu-purple: #663399; /* 主清华紫 */
+      --thu-purple-dark: #4d2673; /* 更深的清华紫 */
+      --thu-purple-light: #9966cc; /* 较浅的清华紫 */
+      --text-dark: #2c3e50;
+      --text-medium: #555;
+      --text-light: #f8f8f8;
+      --bg-light: #fdfdfd;
+      --bg-medium: #f0eff5; /* 略带紫色的浅灰 */
+      --border-color: rgba(0, 0, 0, 0.08);
+      --shadow-light: 0 2px 5px rgba(0, 0, 0, 0.05);
+      --shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
     /* General Styles */
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      color: #333;
+      color: var(--text-medium);
       line-height: 1.6;
+      background-color: var(--bg-light);
     }
 
     .container {
@@ -26,7 +43,7 @@
     }
 
     h1, h2, h3 {
-      color: #2c3e50;
+      color: var(--text-dark);
       text-align: center;
       margin-bottom: 40px;
     }
@@ -37,17 +54,19 @@
 
     h2 {
       font-size: 2.2em;
+      color: var(--thu-purple-dark); /* 标题使用深紫色 */
     }
 
     h3 {
       font-size: 1.8em;
+      color: var(--thu-purple); /* 次级标题使用清华紫 */
     }
 
     /* Header */
     header {
       background-color: #ffffff;
       padding: 20px 0;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      box-shadow: var(--shadow-light);
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -67,7 +86,7 @@
     .logo-placeholder {
       width: 40px;
       height: 40px;
-      background-color: #3498db; /* Placeholder color */
+      background-color: var(--thu-purple); /* LOGO背景色改为清华紫 */
       border-radius: 50%;
       margin-right: 15px;
       display: flex;
@@ -81,7 +100,7 @@
     .header-title {
       font-size: 1.5em;
       font-weight: bold;
-      color: #2c3e50;
+      color: var(--text-dark);
     }
 
     nav ul {
@@ -97,13 +116,13 @@
 
     nav ul li a {
       text-decoration: none;
-      color: #555;
+      color: var(--text-medium);
       font-weight: 500;
       transition: color 0.3s ease;
     }
 
     nav ul li a:hover {
-      color: #3498db;
+      color: var(--thu-purple); /* 导航链接悬停色改为清华紫 */
     }
 
     /* Mobile Navigation Toggle */
@@ -116,20 +135,49 @@
     .menu-toggle span {
       height: 3px;
       width: 25px;
-      background-color: #555;
+      background-color: var(--text-medium);
       margin-bottom: 5px;
       border-radius: 2px;
       transition: all 0.3s ease;
     }
 
-    /* Hero Section */
+    /* Hero Section (Carousel Integration) */
     .hero-section {
-      background: url('https://via.placeholder.com/1500x800/6a93cb/ffffff?text=Rural+Revitalization+Background') no-repeat center center/cover;
+      position: relative;
+      overflow: hidden;
       color: #fff;
       text-align: center;
       padding: 150px 20px;
-      position: relative;
-      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 500px; /* Ensure enough height for content and carousel */
+    }
+
+    .carousel-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0; /* Behind content */
+    }
+
+    .carousel-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .carousel-image.active {
+      opacity: 1;
     }
 
     .hero-section::before {
@@ -139,8 +187,13 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: -1;
+      background: rgba(0, 0, 0, 0.5); /* 半透明遮罩 */
+      z-index: 1; /* 在图片之上，内容之下 */
+    }
+
+    .hero-section .container {
+      position: relative;
+      z-index: 2; /* 内容在遮罩之上 */
     }
 
     .hero-section h1 {
@@ -148,13 +201,68 @@
       font-size: 3.5em;
       margin-bottom: 20px;
       line-height: 1.2;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* 增加文字阴影提高可读性 */
     }
 
     .hero-section p {
       font-size: 1.5em;
       margin-bottom: 40px;
       font-weight: 300;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* 增加文字阴影提高可读性 */
     }
+
+    /* Carousel Navigation */
+    .carousel-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 1.5em;
+      z-index: 2;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .carousel-nav-btn:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .carousel-prev {
+      left: 20px;
+    }
+
+    .carousel-next {
+      right: 20px;
+    }
+
+    .carousel-indicators {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      gap: 10px;
+    }
+
+    .indicator-dot {
+      width: 10px;
+      height: 10px;
+      background-color: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .indicator-dot.active {
+      background-color: white;
+      transform: scale(1.2);
+    }
+
 
     .btn-group .btn {
       display: inline-block;
@@ -167,28 +275,28 @@
     }
 
     .btn-primary {
-      background-color: #3498db;
+      background-color: var(--thu-purple); /* 主按钮清华紫 */
       color: #fff;
     }
 
     .btn-primary:hover {
-      background-color: #2980b9;
+      background-color: var(--thu-purple-dark);
       transform: translateY(-3px);
     }
 
     .btn-secondary {
-      background-color: #27ae60;
+      background-color: var(--thu-purple-light); /* 副按钮浅清华紫 */
       color: #fff;
     }
 
     .btn-secondary:hover {
-      background-color: #229954;
+      background-color: var(--thu-purple);
       transform: translateY(-3px);
     }
 
     /* About Summary */
     .about-summary {
-      background-color: #f8f8f8;
+      background-color: var(--bg-medium); /* 略带紫色的浅灰背景 */
       padding: 60px 20px;
       text-align: center;
     }
@@ -197,13 +305,13 @@
       max-width: 800px;
       margin: 0 auto;
       font-size: 1.1em;
-      color: #555;
+      color: var(--text-medium);
     }
 
     /* About Us Section */
     .about-us-section {
-      background-color: #ffffff;
-      padding-bottom: 40px; /* Adjust if needed */
+      background-color: var(--bg-light);
+      padding-bottom: 40px;
     }
 
     .about-us-content {
@@ -211,13 +319,21 @@
       margin: 0 auto;
       font-size: 1.1em;
       line-height: 1.8;
-      color: #555;
+      color: var(--text-medium);
       text-align: justify;
+    }
+    .about-us-content ul {
+      list-style: disc; /* Keep default disc style for lists */
+      margin-left: 20px;
+      padding-left: 0;
+    }
+    .about-us-content ul li {
+      margin-bottom: 10px;
     }
 
     /* Achievements Section */
     .achievements-section {
-      background-color: #f8f8f8;
+      background-color: var(--bg-medium);
     }
 
     .achievement-category {
@@ -226,7 +342,7 @@
 
     .achievement-category h3 {
       font-size: 1.8em;
-      color: #34495e;
+      color: var(--thu-purple-dark);
       margin-bottom: 30px;
       position: relative;
     }
@@ -235,7 +351,7 @@
       display: block;
       width: 60px;
       height: 3px;
-      background-color: #27ae60;
+      background-color: var(--thu-purple); /* 下划线使用清华紫 */
       margin: 10px auto 0;
       border-radius: 2px;
     }
@@ -244,41 +360,43 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
+      transition: all 0.5s ease-out; /* Add transition for smooth collapse/expand */
+      overflow: hidden; /* Hide overflow when collapsed */
     }
 
     .achievement-item {
       background-color: #fff;
       border-radius: 8px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      box-shadow: var(--shadow-medium);
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
-      cursor: pointer; /* Indicate clickable */
-      text-decoration: none; /* Remove default link underline */
-      color: inherit; /* Inherit text color */
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
     }
 
     .achievement-item:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      box-shadow: var(--shadow-hover);
     }
 
     .achievement-thumbnail {
       width: 100%;
       height: 200px;
-      background-color: #ecf0f1; /* Placeholder color */
+      background-color: #ecf0f1;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 1.2em;
       color: #7f8c8d;
-      overflow: hidden; /* Ensure image fits */
+      overflow: hidden;
     }
     .achievement-thumbnail img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Cover the area, cropping if necessary */
+      object-fit: cover;
     }
 
     .achievement-content {
@@ -292,21 +410,21 @@
       font-size: 1.4em;
       margin-top: 0;
       margin-bottom: 10px;
-      color: #34495e;
+      color: var(--text-dark);
       text-align: left;
     }
 
     .achievement-content .date {
       font-size: 0.9em;
       color: #7f8c8d;
-      margin-bottom: 10px; /* Adjusted margin */
+      margin-bottom: 10px;
     }
 
     .achievement-content .description {
       font-size: 1em;
-      color: #555;
+      color: var(--text-medium);
       flex-grow: 1;
-      margin-bottom: 15px; /* Added margin */
+      margin-bottom: 15px;
     }
 
     /* Styles for Project/Achievement Meta */
@@ -318,7 +436,7 @@
     }
 
     .project-phase {
-      background-color: #3498db;
+      background-color: var(--thu-purple-light); /* 期数标签使用浅清华紫 */
       color: #fff;
       padding: 4px 8px;
       border-radius: 4px;
@@ -334,18 +452,19 @@
     }
 
     .project-tag {
-      background-color: #27ae60;
+      background-color: var(--thu-purple); /* 默认标签使用清华紫 */
       color: #fff;
       padding: 3px 8px;
       border-radius: 12px;
       font-size: 0.75em;
       white-space: nowrap;
     }
+    /* Specific tag colors, ensure they contrast with text */
     .project-tag.tag-poverty { background-color: #e74c3c; } /* Red for poverty */
-    .project-tag.tag-education { background-color: #9b59b6; } /* Purple for education */
-    .project-tag.tag-industry { background-color: #f1c40f; color: #333; } /* Yellow for industry */
+    .project-tag.tag-education { background-color: #8e44ad; } /* Darker purple for education */
+    .project-tag.tag-industry { background-color: #f39c12; color: #333; } /* Orange for industry, dark text */
     .project-tag.tag-culture { background-color: #1abc9c; } /* Turquoise for culture */
-
+    .project-tag.tag-rural-construction { background-color: #27ae60; } /* Green for rural construction */
 
     /* New styles for Expand/Collapse button */
     .expand-btn-wrapper {
@@ -353,17 +472,28 @@
       margin-top: 30px;
     }
     .expand-btn {
-      background-color: #555;
+      background-color: var(--thu-purple);
       color: #fff;
       border: none;
       padding: 10px 20px;
       border-radius: 5px;
       cursor: pointer;
       font-size: 1em;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
     .expand-btn:hover {
-      background-color: #333;
+      background-color: var(--thu-purple-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Collapsed state for achievement grids */
+    .achievement-grid.collapsed {
+      max-height: 650px; /* Adjust based on your item height and initial count (e.g., 2 items high for 300px item + padding) */
+      /* This max-height needs to be calculated based on the height of your 3 visible items + gap */
+      /* For 3 items: (item_height * 1) + (gap * 0) to (item_height * 3) + (gap * 2) */
+      /* Assuming approx 250px per item + 30px gap for 3 items: 250*3 + 30*2 = 750 + 60 = 810px */
+      /* Let's try to make it fit 3 rows nicely, assuming 2 items per row on large screens or 1 on small */
+      /* The max-height value is a heuristic. For truly dynamic heights, JS might be needed to calculate. */
     }
     .achievement-grid.collapsed .achievement-item:nth-of-type(n+4) { /* Hide items from the 4th onwards */
       display: none;
@@ -371,13 +501,15 @@
 
     /* Members Directory Section */
     .members-section {
-      background-color: #ffffff;
+      background-color: var(--bg-light);
     }
 
     .member-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 30px;
+      transition: all 0.5s ease-out; /* Smooth transition for expand/collapse */
+      overflow: hidden;
     }
 
     .member-card {
@@ -387,10 +519,10 @@
       padding: 30px;
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer; /* Indicate clickable */
-      text-decoration: none; /* Remove default link underline */
-      color: inherit; /* Inherit text color */
-      display: block; /* Make the whole card clickable */
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
 
     .member-card:hover {
@@ -401,7 +533,7 @@
     .member-photo-placeholder {
       width: 120px;
       height: 120px;
-      background-color: #bdc3c7; /* Placeholder color */
+      background-color: var(--thu-purple-light); /* 成员头像背景使用浅清华紫 */
       border-radius: 50%;
       margin: 0 auto 20px;
       display: flex;
@@ -421,7 +553,7 @@
       margin-top: 0;
       margin-bottom: 8px;
       font-size: 1.6em;
-      color: #34495e;
+      color: var(--text-dark);
     }
 
     .member-card p {
@@ -429,6 +561,26 @@
       color: #7f8c8d;
       margin-bottom: 0;
     }
+
+    .member-phase-tag {
+      display: inline-block;
+      background-color: var(--thu-purple);
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.8em;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    /* Collapsed state for members grid */
+    .member-grid.collapsed {
+      max-height: 380px; /* Adjust based on initial member card height (e.g., 2 rows of members) */
+    }
+    .member-grid.collapsed .member-card:nth-of-type(n+5) { /* Hide members from the 5th onwards (display first 4) */
+      display: none;
+    }
+
 
     /* Member Detail Page */
     .member-detail-overlay, .achievement-detail-overlay {
@@ -439,7 +591,7 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.7);
-      z-index: 1000;
+      z-index: 2000; /* Higher z-index for overlays */
       justify-content: center;
       align-items: center;
       opacity: 0;
@@ -474,7 +626,7 @@
     .achievement-detail-content .back-link {
       display: inline-block;
       margin-bottom: 25px;
-      color: #3498db;
+      color: var(--thu-purple); /* 返回链接使用清华紫 */
       text-decoration: none;
       font-weight: 500;
       display: flex;
@@ -490,7 +642,7 @@
       width: 180px;
       height: 180px;
       border-radius: 50%;
-      background-color: #bdc3c7; /* Placeholder color */
+      background-color: var(--thu-purple-light); /* 详情页头像背景使用浅清华紫 */
       margin: 0 auto 30px;
       display: flex;
       justify-content: center;
@@ -507,7 +659,7 @@
 
     .member-detail-content h3, .achievement-detail-content h3 {
       font-size: 2.2em;
-      color: #2c3e50;
+      color: var(--text-dark);
       margin-bottom: 10px;
       text-align: center;
     }
@@ -528,7 +680,7 @@
     .member-detail-content .detail-bio, .achievement-detail-content .detail-description {
       font-size: 1.1em;
       line-height: 1.7;
-      color: #555;
+      color: var(--text-medium);
       text-align: justify;
       margin-bottom: 30px;
     }
@@ -536,16 +688,16 @@
     .member-detail-content .contact-info, .achievement-detail-content .detail-tags {
       text-align: center;
       font-size: 1em;
-      color: #555;
+      color: var(--text-medium);
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
-      margin-top: 20px; /* Added for detail tags */
+      margin-top: 20px;
     }
 
     .member-detail-content .contact-info a {
-      color: #3498db;
+      color: var(--thu-purple); /* 链接使用清华紫 */
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -567,16 +719,18 @@
       margin-bottom: 30px;
       overflow: hidden;
     }
-    .achievement-detail-content .detail-image-placeholder img {
+    .achievement-detail-content .detail-image-placeholder img,
+    .achievement-detail-content .detail-image-placeholder iframe {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border: none;
     }
 
     /* Footer */
     footer {
-      background-color: #34495e;
-      color: #ecf0f1;
+      background-color: var(--thu-purple-dark); /* 页脚使用深清华紫 */
+      color: var(--text-light);
       text-align: center;
       padding: 40px 20px;
       font-size: 0.9em;
@@ -621,6 +775,9 @@
       .menu-toggle {
         display: flex;
       }
+      .hero-section {
+        padding: 100px 20px;
+      }
       .hero-section h1 {
         font-size: 2.5em;
       }
@@ -658,6 +815,14 @@
       .member-detail-content .detail-bio, .achievement-detail-content .detail-description {
         font-size: 1em;
       }
+
+      /* Adjust collapsed height for mobile if needed */
+      .achievement-grid.collapsed {
+        max-height: 600px; /* For 2 items on mobile */
+      }
+      .member-grid.collapsed {
+        max-height: 600px; /* For 2 items on mobile */
+      }
     }
   </style>
 </head>
@@ -666,7 +831,7 @@
 <header>
   <div class="container header-content">
     <div class="logo-title">
-      <div class="logo-placeholder">LOGO</div>
+      <div class="logo-placeholder">清华</div>
       <div class="header-title">清华大学怀化溆浦乡村振兴工作站</div>
     </div>
     <nav>
@@ -687,6 +852,16 @@
 
 <main>
   <section id="home" class="hero-section">
+    <div class="carousel-container">
+      <div class="carousel-image active" style="background-image: url('https://via.placeholder.com/1500x800/663399/ffffff?text=清华大学主楼');"></div>
+      <div class="carousel-image" style="background-image: url('https://via.placeholder.com/1500x800/800080/ffffff?text=清华校园风光');"></div>
+      <div class="carousel-image" style="background-image: url('https://via.placeholder.com/1500x800/4d2673/ffffff?text=乡村实践场景');"></div>
+      <div class="carousel-image" style="background-image: url('https://via.placeholder.com/1500x800/9966cc/ffffff?text=清华校训石');"></div>
+    </div>
+    <button class="carousel-nav-btn carousel-prev" aria-label="Previous image">&#10094;</button>
+    <button class="carousel-nav-btn carousel-next" aria-label="Next image">&#10095;</button>
+    <div class="carousel-indicators"></div>
+
     <div class="container">
       <h1>清华大学怀化溆浦乡村振兴工作站</h1>
       <p>智力赋能乡村，实践共筑未来</p>
@@ -729,7 +904,7 @@
 
       <div class="achievement-category" id="category-implemented-projects">
         <h3>落地项目</h3>
-        <div class="achievement-grid collapsed">
+        <div class="achievement-grid">
           <a href="#achievement-detail-project-1" class="achievement-item">
             <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/9b59b6/ffffff?text=Project+1" alt="落地项目1"></div>
             <div class="achievement-content">
@@ -740,7 +915,7 @@
               <p class="date">发布日期：2024年05月10日</p>
               <p class="description">成功完成溆浦村中心文化广场的规划设计与施工监督，提升村民休闲娱乐空间。</p>
               <div class="project-tags">
-                <span class="project-tag tag-industry">乡村建设</span>
+                <span class="project-tag tag-rural-construction">乡村建设</span>
                 <span class="project-tag tag-culture">文化提升</span>
               </div>
             </div>
@@ -786,7 +961,7 @@
               <p class="description">对溆浦村部分老旧供水管网进行改造升级，确保村民饮水安全。</p>
               <div class="project-tags">
                 <span class="project-tag tag-poverty">民生改善</span>
-                <span class="project-tag tag-industry">基础设施</span>
+                <span class="project-tag tag-rural-construction">基础设施</span>
               </div>
             </div>
           </a>
@@ -813,7 +988,7 @@
 
       <div class="achievement-category" id="category-design-results">
         <h3>设计成果</h3>
-        <div class="achievement-grid collapsed">
+        <div class="achievement-grid">
           <a href="#achievement-detail-design-1" class="achievement-item">
             <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/e67e22/ffffff?text=Design+1" alt="设计成果1"></div>
             <div class="achievement-content">
@@ -867,7 +1042,7 @@
 
       <div class="achievement-category" id="category-promotion-results">
         <h3>宣传成果</h3>
-        <div class="achievement-grid collapsed">
+        <div class="achievement-grid">
           <a href="#achievement-detail-promotion-1" class="achievement-item">
             <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/c0392b/ffffff?text=Promotion+1" alt="宣传成果1"></div>
             <div class="achievement-content">
@@ -921,7 +1096,7 @@
 
       <div class="achievement-category" id="category-research-reports">
         <h3>调研报告类</h3>
-        <div class="achievement-grid collapsed">
+        <div class="achievement-grid">
           <a href="#achievement-detail-report-1" class="achievement-item">
             <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/1abc9c/ffffff?text=Report+1" alt="调研报告1"></div>
             <div class="achievement-content">
@@ -964,37 +1139,53 @@
   <section id="members" class="members-section">
     <div class="container">
       <h2>成员通讯录</h2>
-      <div class="member-grid">
+      <div class="member-grid-container"> <div class="member-grid">
         <a href="#member-detail-wang" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/7f8c8d/ffffff?text=头像1" alt="成员头像"></div>
+          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/7f8c8d/ffffff?text=王教授" alt="成员头像"></div>
           <h4>王教授</h4>
           <p>工作站站长 / 乡村发展专家</p>
           <p class="member-phase-tag">第一期实践支队</p>
         </a>
         <a href="#member-detail-li" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/bdc3c7/ffffff?text=头像2" alt="成员头像"></div>
+          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/bdc3c7/ffffff?text=李老师" alt="成员头像"></div>
           <h4>李老师</h4>
           <p>指导老师 / 建筑学院</p>
           <p class="member-phase-tag">第一期 & 第二期实践支队</p>
         </a>
         <a href="#member-detail-zhang" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/95a5a6/ffffff?text=头像3" alt="成员头像"></div>
+          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/95a5a6/ffffff?text=张明" alt="成员头像"></div>
           <h4>张明</h4>
           <p>核心成员 / 研究生</p>
           <p class="member-phase-tag">第二期实践支队</p>
         </a>
         <a href="#member-detail-chen" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/c1c1c1/ffffff?text=头像4" alt="成员头像"></div>
+          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/c1c1c1/ffffff?text=陈芳" alt="成员头像"></div>
           <h4>陈芳</h4>
           <p>核心成员 / 本科生</p>
           <p class="member-phase-tag">第一期实践支队</p>
         </a>
         <a href="#member-detail-zhao" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/888888/ffffff?text=头像5" alt="成员头像"></div>
+          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/888888/ffffff?text=赵强" alt="成员头像"></div>
           <h4>赵强</h4>
           <p>志愿者代表</p>
           <p class="member-phase-tag">第二期实践支队</p>
         </a>
+        <a href="#member-detail-liu" class="member-card">
+          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/a9a9a9/ffffff?text=刘华" alt="成员头像"></div>
+          <h4>刘华</h4>
+          <p>联络协调员</p>
+          <p class="member-phase-tag">第一期实践支队</p>
+        </a>
+        <a href="#member-detail-sun" class="member-card">
+          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/d3d3d3/ffffff?text=孙悦" alt="成员头像"></div>
+          <h4>孙悦</h4>
+          <p>财务管理</p>
+          <p class="member-phase-tag">第二期实践支队</p>
+        </a>
+      </div>
+        <div class="expand-btn-wrapper">
+          <button class="expand-btn" id="toggle-members-btn" data-target="member-grid">查看更多成员</button>
+        </div>
       </div>
     </div>
   </section>
@@ -1002,7 +1193,7 @@
 
 <footer>
   <div class="container">
-    <p>&copy; 2025 清华大学怀化溆浦乡村振兴工作站. All Rights Reserved.</p>
+    <p>© 2025 清华大学怀化溆浦乡村振兴工作站. All Rights Reserved.</p>
   </div>
 </footer>
 
@@ -1034,7 +1225,9 @@
 
 <script>
   // --- Global Constants & Mobile Menu Toggle ---
-  const INITIAL_DISPLAY_COUNT = 3; // Number of items to show initially in achievement categories
+  const INITIAL_ACHIEVEMENT_DISPLAY_COUNT = 3; // Number of items to show initially in achievement categories
+  const INITIAL_MEMBER_DISPLAY_COUNT = 4; // Number of members to show initially
+
   const mobileMenu = document.getElementById('mobile-menu');
   const mainNav = document.getElementById('main-nav');
 
@@ -1061,6 +1254,70 @@
       }
     });
   });
+
+  // --- Hero Section Carousel Logic ---
+  const carouselImages = document.querySelectorAll('.carousel-image');
+  const carouselIndicatorsContainer = document.querySelector('.carousel-indicators');
+  const carouselPrevBtn = document.querySelector('.carousel-prev');
+  const carouselNextBtn = document.querySelector('.carousel-next');
+  let currentImageIndex = 0;
+  let carouselInterval;
+
+  function createIndicators() {
+    carouselImages.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.classList.add('indicator-dot');
+      if (index === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToImage(index));
+      carouselIndicatorsContainer.appendChild(dot);
+    });
+  }
+
+  function updateCarousel() {
+    carouselImages.forEach((img, idx) => {
+      img.classList.toggle('active', idx === currentImageIndex);
+    });
+    document.querySelectorAll('.indicator-dot').forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === currentImageIndex);
+    });
+  }
+
+  function goToImage(index) {
+    currentImageIndex = (index + carouselImages.length) % carouselImages.length;
+    updateCarousel();
+    resetAutoPlay();
+  }
+
+  function nextImage() {
+    goToImage(currentImageIndex + 1);
+  }
+
+  function prevImage() {
+    goToImage(currentImageIndex - 1);
+  }
+
+  function startAutoPlay() {
+    carouselInterval = setInterval(nextImage, 6000); // Change image every 6 seconds
+  }
+
+  function resetAutoPlay() {
+    clearInterval(carouselInterval);
+    startAutoPlay();
+  }
+
+  // Initialize carousel
+  if (carouselImages.length > 0) {
+    createIndicators();
+    startAutoPlay();
+    carouselPrevBtn.addEventListener('click', prevImage);
+    carouselNextBtn.addEventListener('click', nextImage);
+  } else {
+    // Hide carousel controls if no images
+    carouselPrevBtn.style.display = 'none';
+    carouselNextBtn.style.display = 'none';
+    carouselIndicatorsContainer.style.display = 'none';
+  }
+
 
   // --- Member Data & Detail Logic ---
   const membersData = {
@@ -1113,6 +1370,26 @@
       bio: "赵强是清华大学热心公益事业的本科生，作为志愿者代表，他积极参与溆浦工作站的各项活动。他主要负责现场协调、活动组织和村民服务工作。赵强为人热情开朗，乐于助人，与村民建立了深厚的友谊。他在实践中锻炼了组织协调能力和解决问题的能力，对乡村生活有了更深刻的认识。他认为，青年力量是乡村振兴不可或缺的一部分。",
       contact: {
         email: "zhaoqiang@example.com",
+      }
+    },
+    "member-detail-liu": {
+      name: "刘华",
+      role: "联络协调员",
+      phase: "第一期实践支队",
+      photo: "https://via.placeholder.com/200/a9a9a9/ffffff?text=刘华头像",
+      bio: "刘华是清华大学建筑学院的博士生，在工作站主要负责对外联络和项目协调。她具有出色的沟通能力和组织能力，有效搭建了工作站与当地政府、企业以及村民之间的沟通桥梁，确保各项工作的顺利推进。刘华对乡村规划和发展模式有深入研究，在团队中发挥了重要的枢纽作用。",
+      contact: {
+        email: "liuhua@example.com",
+      }
+    },
+    "member-detail-sun": {
+      name: "孙悦",
+      role: "财务管理",
+      phase: "第二期实践支队",
+      photo: "https://via.placeholder.com/200/d3d3d3/ffffff?text=孙悦头像",
+      bio: "孙悦是清华大学经济管理学院的硕士生，在工作站主要负责项目资金的预算、支出和审计工作。她细致严谨，确保了工作站各项经费的规范使用和透明管理，为项目的顺利实施提供了坚实的财务保障。孙悦还积极参与了部分项目的经济效益评估工作，为工作站的决策提供了财务数据支持。",
+      contact: {
+        email: "sunyue@example.com",
       }
     }
   };
@@ -1306,8 +1583,40 @@
       return;
     }
 
-    let tagsHtml = achievement.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('');
-    // Add specific tag classes if needed, for example, by checking tag content
+    // Map tag content to specific classes for coloring if needed
+    const tagClassMap = {
+      "乡村建设": "tag-rural-construction",
+      "文化提升": "tag-culture",
+      "产业发展": "tag-industry",
+      "扶贫项目": "tag-poverty",
+      "旅游开发": "tag-industry",
+      "增收": "tag-poverty",
+      "民生改善": "tag-poverty",
+      "基础设施": "tag-rural-construction",
+      "教育帮扶": "tag-education",
+      "文旅融合": "tag-culture",
+      "旅游规划": "tag-industry",
+      "生态设计": "tag-culture",
+      "建筑设计": "tag-industry",
+      "文化传承": "tag-culture",
+      "公共艺术": "tag-culture",
+      "媒体传播": "tag-culture",
+      "品牌建设": "tag-industry",
+      "校际交流": "tag-education",
+      "社会影响": "tag-education",
+      "形象塑造": "tag-culture",
+      "数据分析": "tag-research", /* Example new tag class */
+      "发展评估": "tag-research",
+      "市场研究": "tag-research",
+      "农业发展": "tag-industry",
+      // Add more as necessary
+    };
+
+    let tagsHtml = achievement.tags.map(tag => {
+      const className = tagClassMap[tag] || ''; // Get specific class or empty string
+      return `<span class="project-tag ${className}">${tag}</span>`;
+    }).join('');
+
 
     let mediaContent = '';
     if (achievement.image) {
@@ -1315,7 +1624,8 @@
     }
     if (achievement.video) {
       // Basic embed for YouTube, can be expanded for other platforms
-      mediaContent += `<div class="detail-image-placeholder" style="height: 350px;"><iframe width="100%" height="100%" src="${achievement.video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+      // Use iframe for embedded video
+      mediaContent += `<div class="detail-image-placeholder" style="height: 350px;"><iframe src="${achievement.video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
     }
 
 
@@ -1363,14 +1673,15 @@
     const items = Array.from(grid.querySelectorAll('.achievement-item'));
     const expandBtn = category.querySelector('.expand-btn');
 
-    if (!expandBtn || items.length <= INITIAL_DISPLAY_COUNT) {
-      expandBtn.style.display = 'none'; // Hide button if less than or equal to initial count
-      return;
-    }
+    if (!expandBtn) return; // Exit if no button found (shouldn't happen with current HTML)
 
-    // Initialize to collapsed state
-    grid.classList.add('collapsed');
-    expandBtn.textContent = '查看更多';
+    // Initially hide items beyond the limit and set button text
+    if (items.length > INITIAL_ACHIEVEMENT_DISPLAY_COUNT) {
+      grid.classList.add('collapsed'); // Apply collapsed class
+      expandBtn.textContent = '查看更多';
+    } else {
+      expandBtn.style.display = 'none'; // Hide button if no need to collapse
+    }
 
     expandBtn.addEventListener('click', () => {
       if (grid.classList.contains('collapsed')) {
@@ -1384,6 +1695,33 @@
       }
     });
   });
+
+
+  // --- Expand/Collapse Logic for Members Directory ---
+  const memberGrid = document.querySelector('.members-section .member-grid');
+  const memberCards = Array.from(memberGrid.querySelectorAll('.member-card'));
+  const toggleMembersBtn = document.getElementById('toggle-members-btn');
+
+  if (memberCards.length > INITIAL_MEMBER_DISPLAY_COUNT) {
+    memberGrid.classList.add('collapsed'); // Apply collapsed class
+    toggleMembersBtn.textContent = '查看更多成员';
+    toggleMembersBtn.style.display = 'block'; // Ensure button is visible
+  } else {
+    toggleMembersBtn.style.display = 'none'; // Hide button if no need to collapse
+  }
+
+  toggleMembersBtn.addEventListener('click', () => {
+    if (memberGrid.classList.contains('collapsed')) {
+      memberGrid.classList.remove('collapsed');
+      toggleMembersBtn.textContent = '收起成员列表';
+    } else {
+      memberGrid.classList.add('collapsed');
+      toggleMembersBtn.textContent = '查看更多成员';
+      // Scroll back to the top of the members section when collapsed
+      document.getElementById('members').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+
 
   // --- Initial Hash Handling on Page Load ---
   window.addEventListener('hashchange', function() {
