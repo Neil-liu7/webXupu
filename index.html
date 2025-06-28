@@ -296,14 +296,53 @@
     .achievement-content .date {
       font-size: 0.9em;
       color: #7f8c8d;
-      margin-bottom: 15px;
+      margin-bottom: 10px; /* Adjusted margin */
     }
 
     .achievement-content .description {
       font-size: 1em;
       color: #555;
       flex-grow: 1;
+      margin-bottom: 15px; /* Added margin */
     }
+
+    /* New Styles for Implemented Projects */
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .project-phase {
+      background-color: #3498db;
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .project-tag {
+      background-color: #27ae60;
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 0.75em;
+      white-space: nowrap;
+    }
+    .project-tag.tag-poverty { background-color: #e74c3c; } /* Red for poverty */
+    .project-tag.tag-education { background-color: #9b59b6; } /* Purple for education */
+    .project-tag.tag-industry { background-color: #f1c40f; color: #333; } /* Yellow for industry */
+    .project-tag.tag-culture { background-color: #1abc9c; } /* Turquoise for culture */
+
 
     /* Members Directory Section */
     .members-section {
@@ -323,6 +362,10 @@
       padding: 30px;
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer; /* Indicate clickable */
+      text-decoration: none; /* Remove default link underline */
+      color: inherit; /* Inherit text color */
+      display: block; /* Make the whole card clickable */
     }
 
     .member-card:hover {
@@ -361,6 +404,122 @@
       color: #7f8c8d;
       margin-bottom: 0;
     }
+
+    /* Member Detail Page */
+    .member-detail-overlay {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .member-detail-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .member-detail-content {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      max-width: 700px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .member-detail-overlay.active .member-detail-content {
+      transform: translateY(0);
+    }
+
+    .member-detail-content .back-to-members {
+      display: inline-block;
+      margin-bottom: 25px;
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .member-detail-content .back-to-members:hover {
+      text-decoration: underline;
+    }
+
+    .member-detail-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background-color: #bdc3c7; /* Placeholder color */
+      margin: 0 auto 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2em;
+      color: #fff;
+      overflow: hidden;
+    }
+    .member-detail-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .member-detail-content h3 {
+      font-size: 2.2em;
+      color: #2c3e50;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .member-detail-content .detail-role {
+      font-size: 1.3em;
+      color: #7f8c8d;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .member-detail-content .detail-bio {
+      font-size: 1.1em;
+      line-height: 1.7;
+      color: #555;
+      text-align: justify;
+      margin-bottom: 30px;
+    }
+
+    .member-detail-content .contact-info {
+      text-align: center;
+      font-size: 1em;
+      color: #555;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .member-detail-content .contact-info a {
+      color: #3498db;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .member-detail-content .contact-info a:hover {
+      text-decoration: underline;
+    }
+
 
     /* Footer */
     footer {
@@ -429,6 +588,23 @@
       }
       section {
         padding: 60px 0;
+      }
+      .member-detail-content {
+        padding: 20px;
+        width: 95%;
+      }
+      .member-detail-photo {
+        width: 150px;
+        height: 150px;
+      }
+      .member-detail-content h3 {
+        font-size: 1.8em;
+      }
+      .member-detail-content .detail-role {
+        font-size: 1.1em;
+      }
+      .member-detail-content .detail-bio {
+        font-size: 1em;
       }
     }
   </style>
@@ -505,25 +681,46 @@
           <div class="achievement-item">
             <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/9b59b6/ffffff?text=Project+1" alt="落地项目1"></div>
             <div class="achievement-content">
-              <h4>激浦村文化广场改造项目</h4>
+              <div class="project-meta">
+                <h4>激浦村文化广场改造项目</h4>
+                <span class="project-phase">第一期</span>
+              </div>
               <p class="date">发布日期：2024年05月10日</p>
               <p class="description">成功完成激浦村中心文化广场的规划设计与施工监督，提升村民休闲娱乐空间。</p>
+              <div class="project-tags">
+                <span class="project-tag tag-industry">乡村建设</span>
+                <span class="project-tag tag-culture">文化提升</span>
+              </div>
             </div>
           </div>
           <div class="achievement-item">
             <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/3498db/ffffff?text=Project+2" alt="落地项目2"></div>
             <div class="achievement-content">
-              <h4>农产品品牌孵化与电商平台搭建</h4>
+              <div class="project-meta">
+                <h4>农产品品牌孵化与电商平台搭建</h4>
+                <span class="project-phase">第二期</span>
+              </div>
               <p class="date">发布日期：2024年03月22日</p>
               <p class="description">协助当地农户建立“激浦优选”品牌，并对接线上销售渠道，初见成效。</p>
+              <div class="project-tags">
+                <span class="project-tag tag-industry">产业发展</span>
+                <span class="project-tag tag-poverty">扶贫项目</span>
+              </div>
             </div>
           </div>
           <div class="achievement-item">
             <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/2ecc71/ffffff?text=Project+3" alt="落地项目3"></div>
             <div class="achievement-content">
-              <h4>乡村民宿示范点改造工程</h4>
+              <div class="project-meta">
+                <h4>乡村民宿示范点改造工程</h4>
+                <span class="project-phase">第一期</span>
+              </div>
               <p class="date">发布日期：2023年11月18日</p>
               <p class="description">对激浦村一处闲置民居进行现代化改造，打造成为具有当地特色的乡村民宿样板。</p>
+              <div class="project-tags">
+                <span class="project-tag tag-industry">旅游开发</span>
+                <span class="project-tag tag-poverty">增收</span>
+              </div>
             </div>
           </div>
         </div>
@@ -602,31 +799,31 @@
     <div class="container">
       <h2>成员通讯录</h2>
       <div class="member-grid">
-        <div class="member-card">
+        <a href="#member-detail-wang" class="member-card">
           <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/7f8c8d/ffffff?text=头像1" alt="成员头像"></div>
           <h4>王教授</h4>
           <p>工作站站长 / 乡村发展专家</p>
-        </div>
-        <div class="member-card">
+        </a>
+        <a href="#member-detail-li" class="member-card">
           <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/bdc3c7/ffffff?text=头像2" alt="成员头像"></div>
           <h4>李老师</h4>
           <p>指导老师 / 建筑学院</p>
-        </div>
-        <div class="member-card">
+        </a>
+        <a href="#member-detail-zhang" class="member-card">
           <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/95a5a6/ffffff?text=头像3" alt="成员头像"></div>
           <h4>张明</h4>
           <p>核心成员 / 研究生</p>
-        </div>
-        <div class="member-card">
+        </a>
+        <a href="#member-detail-chen" class="member-card">
           <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/c1c1c1/ffffff?text=头像4" alt="成员头像"></div>
           <h4>陈芳</h4>
           <p>核心成员 / 本科生</p>
-        </div>
-        <div class="member-card">
+        </a>
+        <a href="#member-detail-zhao" class="member-card">
           <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/888888/ffffff?text=头像5" alt="成员头像"></div>
           <h4>赵强</h4>
           <p>志愿者代表</p>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -638,11 +835,29 @@
   </div>
 </footer>
 
+<div id="member-detail-overlay" class="member-detail-overlay">
+  <div class="member-detail-content">
+    <a href="#members" class="back-to-members" id="back-to-members-link">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5a.5.5 0 0 0 .5-.5z"/>
+      </svg>
+      返回成员通讯录
+    </a>
+    <div id="member-detail-card">
+    </div>
+  </div>
+</div>
+
 <script>
   // Smooth scrolling for navigation links
   document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
+      // Close member detail overlay if open
+      const memberDetailOverlay = document.getElementById('member-detail-overlay');
+      memberDetailOverlay.classList.remove('active');
+
+      // Scroll to section
       document.querySelector(this.getAttribute('href')).scrollIntoView({
         behavior: 'smooth'
       });
@@ -662,6 +877,133 @@
     mainNav.classList.toggle('active');
     mobileMenu.classList.toggle('active');
   });
+
+  // Member Data (simulating a backend or database)
+  const membersData = {
+    "member-detail-wang": {
+      name: "王教授",
+      role: "工作站站长 / 乡村发展专家",
+      photo: "https://via.placeholder.com/200/7f8c8d/ffffff?text=王教授头像",
+      bio: "王教授是清华大学乡村振兴领域的资深专家，拥有超过20年的农村发展研究与实践经验。他致力于理论与实践相结合，推动多学科交叉研究，为激浦工作站的战略规划和项目落地提供了核心指导。王教授尤其关注乡村产业的生态化发展和人才培育，多次深入基层，与村民面对面交流，深受当地群众的信任与爱戴。在担任工作站站长期间，他领导团队成功孵化了多个示范项目，为激浦地区的经济社会发展注入了新活力。",
+      contact: {
+        email: "wanglaoshi@tsinghua.edu.cn",
+        wechat: "WangJiaoshouWX",
+        // linkedin: "wang-professor-linkedin" // Example for other contacts
+      }
+    },
+    "member-detail-li": {
+      name: "李老师",
+      role: "指导老师 / 建筑学院",
+      photo: "https://via.placeholder.com/200/bdc3c7/ffffff?text=李老师头像",
+      bio: "李老师是清华大学建筑学院的青年骨干教师，专注于乡村建筑设计与改造、历史村落保护等领域。她以其创新的设计理念和对传统文化的深刻理解，为激浦村的建筑风貌提升和人居环境改善提供了专业支持。李老师多次带领学生团队驻扎乡村，亲手参与设计和建造，将学术研究转化为实际成果，赢得了广泛赞誉。她积极推动绿色建筑技术在乡村的应用，助力激浦村走上可持续发展之路。",
+      contact: {
+        email: "lilaoshi@tsinghua.edu.cn",
+        // weibo: "@李老师建筑设计"
+      }
+    },
+    "member-detail-zhang": {
+      name: "张明",
+      role: "核心成员 / 研究生",
+      photo: "https://via.placeholder.com/200/95a5a6/ffffff?text=张明头像",
+      bio: "张明是清华大学公共管理学院的优秀研究生，在激浦工作站主要负责社会调研、数据分析和报告撰写工作。他具备扎实的理论基础和严谨的科研态度，对乡村治理和政策执行有着独到的见解。在激浦的实践中，张明积极参与村民访谈，收集一手资料，为工作站的决策提供了重要依据。他善于沟通协调，是团队中不可或缺的桥梁。",
+      contact: {
+        email: "zhangming@example.com",
+        // github: "zhangming-github"
+      }
+    },
+    "member-detail-chen": {
+      name: "陈芳",
+      role: "核心成员 / 本科生",
+      photo: "https://via.placeholder.com/200/c1c1c1/ffffff?text=陈芳头像",
+      bio: "陈芳是清华大学美术学院的本科生，在工作站主要负责宣传材料设计、视觉呈现和文化创意工作。她将艺术设计与乡村振兴相结合，通过海报、文创产品、短视频等多种形式，生动展现激浦的乡村魅力和发展成果。陈芳富有创意和执行力，她的作品不仅美观大方，更能有效地传播乡村振兴理念，激发村民的参与热情。她在团队中是名副其实的“美学担当”。",
+      contact: {
+        email: "chenfang@example.com",
+        // portfolio: "chenfang-design.com"
+      }
+    },
+    "member-detail-zhao": {
+      name: "赵强",
+      role: "志愿者代表",
+      photo: "https://via.placeholder.com/200/888888/ffffff?text=赵强头像",
+      bio: "赵强是清华大学热心公益事业的本科生，作为志愿者代表，他积极参与激浦工作站的各项活动。他主要负责现场协调、活动组织和村民服务工作。赵强为人热情开朗，乐于助人，与村民建立了深厚的友谊。他在实践中锻炼了组织协调能力和解决问题的能力，对乡村生活有了更深刻的认识。他认为，青年力量是乡村振兴不可或缺的一部分。",
+      contact: {
+        email: "zhaoqiang@example.com",
+        // phone: "+86 1234567890" // Example phone number
+      }
+    }
+  };
+
+  const memberDetailOverlay = document.getElementById('member-detail-overlay');
+  const memberDetailCard = document.getElementById('member-detail-card');
+  const backToMembersLink = document.getElementById('back-to-members-link');
+
+  // Function to render member details
+  function renderMemberDetail(memberId) {
+    const member = membersData[memberId];
+    if (!member) {
+      console.error("Member not found:", memberId);
+      return;
+    }
+
+    memberDetailCard.innerHTML = `
+                <div class="member-detail-photo">
+                    <img src="${member.photo}" alt="${member.name}头像">
+                </div>
+                <h3>${member.name}</h3>
+                <p class="detail-role">${member.role}</p>
+                <p class="detail-bio">${member.bio}</p>
+                <div class="contact-info">
+                    ${member.contact.email ? `<a href="mailto:${member.contact.email}">邮箱: ${member.contact.email}</a>` : ''}
+                    ${member.contact.wechat ? `<span>微信: ${member.contact.wechat}</span>` : ''}
+                    ${member.contact.phone ? `<span>电话: ${member.contact.phone}</span>` : ''}
+                    ${member.contact.linkedin ? `<a href="https://linkedin.com/in/${member.contact.linkedin}" target="_blank">LinkedIn</a>` : ''}
+                    ${member.contact.weibo ? `<a href="https://weibo.com/${member.contact.weibo}" target="_blank">微博</a>` : ''}
+                    ${member.contact.portfolio ? `<a href="${member.contact.portfolio}" target="_blank">个人主页</a>` : ''}
+                </div>
+            `;
+  }
+
+  // Handle member card clicks
+  document.querySelectorAll('.member-card').forEach(card => {
+    card.addEventListener('click', function (e) {
+      e.preventDefault();
+      const memberId = this.getAttribute('href').substring(1); // Get ID from href
+      renderMemberDetail(memberId);
+      memberDetailOverlay.classList.add('active');
+      history.pushState(null, '', `#${memberId}`); // Update URL hash
+    });
+  });
+
+  // Handle back button/overlay click to close detail
+  backToMembersLink.addEventListener('click', function(e) {
+    e.preventDefault();
+    memberDetailOverlay.classList.remove('active');
+    history.pushState(null, '', '#members'); // Restore #members hash
+  });
+
+  memberDetailOverlay.addEventListener('click', function(e) {
+    if (e.target === memberDetailOverlay) { // Only close if clicking outside the content
+      memberDetailOverlay.classList.remove('active');
+      history.pushState(null, '', '#members'); // Restore #members hash
+    }
+  });
+
+  // Handle browser back/forward buttons for hash changes
+  window.addEventListener('hashchange', function() {
+    const hash = window.location.hash;
+    if (hash.startsWith('#member-detail-')) {
+      renderMemberDetail(hash.substring(1));
+      memberDetailOverlay.classList.add('active');
+    } else if (hash === '#members' || hash === '') {
+      memberDetailOverlay.classList.remove('active');
+    }
+  });
+
+  // Initial check for hash on page load
+  if (window.location.hash.startsWith('#member-detail-')) {
+    renderMemberDetail(window.location.hash.substring(1));
+    memberDetailOverlay.classList.add('active');
+  }
 </script>
 
 </body>
