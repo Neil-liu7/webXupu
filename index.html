@@ -4,30 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>清华大学怀化溆浦乡村振兴工作站</title>
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Tsinghua_University_emblem.svg/1200px-Tsinghua_University_emblem.svg.png" type="image/x-icon">
   <style>
-    /* 清华紫配色方案 */
+    /* 全新配色方案：大气、美观 */
     :root {
-      --thu-purple: #663399; /* 主清华紫 */
-      --thu-purple-dark: #4d2673; /* 更深的清华紫 */
-      --thu-purple-light: #9966cc; /* 较浅的清华紫 */
-      --text-dark: #2c3e50;
-      --text-medium: #555;
-      --text-light: #f8f8f8;
-      --bg-light: #fdfdfd;
-      --bg-medium: #f0eff5; /* 略带紫色的浅灰 */
-      --border-color: rgba(0, 0, 0, 0.08);
+      --primary-color: #007bff; /* 主色调：活力蓝，体现专业和现代感 */
+      --primary-dark: #0056b3; /* 主色调的深色变体 */
+      --accent-color: #28a745; /* 辅助色/强调色：绿色，象征生机与活力 */
+      --accent-dark: #1e7e34; /* 辅助色深色变体 */
+      --text-dark: #343a40; /* 深色文本：深灰，提供稳重感 */
+      --text-medium: #6c757d; /* 中等文本：通用中灰 */
+      --text-light: #f8f9fa; /* 浅色文本：用于深色背景 */
+      --bg-light: #ffffff; /* 浅背景色：纯白，干净明亮 */
+      --bg-medium: #f2f6fc; /* 中背景色：略带蓝调的浅灰，用于区分区块 */
+      --border-color: rgba(0, 0, 0, 0.1);
       --shadow-light: 0 2px 5px rgba(0, 0, 0, 0.05);
       --shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.08);
       --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.12);
     }
 
-    /* General Styles */
+    /* 通用样式 */
+    html {
+      scroll-behavior: smooth; /* 平滑滚动 */
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      color: var(--text-medium);
+      color: var(--text-dark);
       line-height: 1.6;
       background-color: var(--bg-light);
     }
@@ -40,6 +46,11 @@
 
     section {
       padding: 80px 0;
+      background-color: var(--bg-light); /* 默认背景 */
+    }
+
+    section:nth-of-type(even) { /* 交替背景色 */
+      background-color: var(--bg-medium);
     }
 
     h1, h2, h3 {
@@ -50,57 +61,72 @@
 
     h1 {
       font-size: 2.8em;
+      color: var(--text-light); /* hero-section 标题颜色 */
     }
 
     h2 {
       font-size: 2.2em;
-      color: var(--thu-purple-dark); /* 标题使用深紫色 */
     }
 
     h3 {
       font-size: 1.8em;
-      color: var(--thu-purple); /* 次级标题使用清华紫 */
+      color: var(--primary-color);
     }
 
-    /* Header */
+    /* 按钮样式 */
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 1em;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: var(--text-light);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--accent-color);
+      color: var(--text-light);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--accent-dark);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* 顶部导航栏 */
     header {
-      background-color: #ffffff;
-      padding: 20px 0;
+      background-color: var(--bg-light);
+      padding: 15px 0;
       box-shadow: var(--shadow-light);
       position: sticky;
       top: 0;
       z-index: 1000;
     }
 
-    .header-content {
+    .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .logo-title {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo-placeholder {
-      width: 40px;
-      height: 40px;
-      background-color: var(--thu-purple); /* LOGO背景色改为清华紫 */
-      border-radius: 50%;
-      margin-right: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
+    .logo {
+      font-size: 1.8em;
       font-weight: bold;
-      font-size: 1.2em;
-    }
-
-    .header-title {
-      font-size: 1.5em;
-      font-weight: bold;
-      color: var(--text-dark);
+      color: var(--primary-color);
+      text-decoration: none;
     }
 
     nav ul {
@@ -116,55 +142,80 @@
 
     nav ul li a {
       text-decoration: none;
-      color: var(--text-medium);
+      color: var(--text-dark);
       font-weight: 500;
       transition: color 0.3s ease;
+      position: relative;
     }
 
-    nav ul li a:hover {
-      color: var(--thu-purple); /* 导航链接悬停色改为清华紫 */
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--primary-color);
     }
 
-    /* Mobile Navigation Toggle */
+    /* 汉堡菜单图标（移动端） */
     .menu-toggle {
       display: none;
       flex-direction: column;
       cursor: pointer;
+      gap: 5px;
     }
 
-    .menu-toggle span {
-      height: 3px;
+    .menu-toggle .bar {
       width: 25px;
-      background-color: var(--text-medium);
-      margin-bottom: 5px;
-      border-radius: 2px;
+      height: 3px;
+      background-color: var(--text-dark);
       transition: all 0.3s ease;
     }
 
-    /* Hero Section (Carousel Integration) */
+    /* Hero Section (主页标题区域) */
     .hero-section {
       position: relative;
-      overflow: hidden;
-      color: #fff;
-      text-align: center;
-      padding: 150px 20px;
+      width: 100%;
+      height: 600px; /* 调整高度 */
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      min-height: 500px; /* Ensure enough height for content and carousel */
+      text-align: center;
+      color: var(--text-light); /* 确保文本在图片上可读 */
+      overflow: hidden; /* 隐藏轮播图溢出部分 */
     }
 
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.4); /* 遮罩层，保持文本可读性 */
+      z-index: 1;
+    }
+
+    .hero-section .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-section p {
+      font-size: 1.3em;
+      margin-bottom: 30px;
+      max-width: 800px;
+    }
+
+    /* 轮播图样式 */
     .carousel-container {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0; /* Behind content */
+      overflow: hidden;
+      z-index: 0; /* 确保在内容之下，遮罩之上 */
     }
 
-    .carousel-image {
+    .carousel-slide {
       position: absolute;
       top: 0;
       left: 0;
@@ -176,1571 +227,1158 @@
       transition: opacity 1s ease-in-out;
     }
 
-    .carousel-image.active {
+    .carousel-slide.active {
       opacity: 1;
     }
 
-    .hero-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5); /* 半透明遮罩 */
-      z-index: 1; /* 在图片之上，内容之下 */
-    }
-
-    .hero-section .container {
-      position: relative;
-      z-index: 2; /* 内容在遮罩之上 */
-    }
-
-    .hero-section h1 {
-      color: #fff;
-      font-size: 3.5em;
-      margin-bottom: 20px;
-      line-height: 1.2;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* 增加文字阴影提高可读性 */
-    }
-
-    .hero-section p {
-      font-size: 1.5em;
-      margin-bottom: 40px;
-      font-weight: 300;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* 增加文字阴影提高可读性 */
-    }
-
-    /* Carousel Navigation */
-    .carousel-nav-btn {
+    .carousel-nav {
       position: absolute;
       top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
       transform: translateY(-50%);
+      z-index: 3; /* 在遮罩层之上 */
+      padding: 0 20px;
+    }
+
+    .carousel-nav button {
       background-color: rgba(0, 0, 0, 0.5);
-      color: white;
+      color: var(--text-light);
       border: none;
       padding: 10px 15px;
-      cursor: pointer;
       font-size: 1.5em;
-      z-index: 2;
-      border-radius: 5px;
+      cursor: pointer;
+      border-radius: 50%;
       transition: background-color 0.3s ease;
     }
 
-    .carousel-nav-btn:hover {
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-
-    .carousel-prev {
-      left: 20px;
-    }
-
-    .carousel-next {
-      right: 20px;
+    .carousel-nav button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
     }
 
     .carousel-indicators {
       position: absolute;
       bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex;
-      gap: 10px;
+      width: 100%;
+      text-align: center;
+      z-index: 3; /* 在遮罩层之上 */
     }
 
-    .indicator-dot {
+    .carousel-indicators span {
+      display: inline-block;
       width: 10px;
       height: 10px;
-      background-color: rgba(255, 255, 255, 0.6);
+      background-color: rgba(255, 255, 255, 0.5);
       border-radius: 50%;
+      margin: 0 5px;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
+      transition: background-color 0.3s ease;
     }
 
-    .indicator-dot.active {
-      background-color: white;
-      transform: scale(1.2);
+    .carousel-indicators span.active {
+      background-color: var(--text-light);
     }
 
-
-    .btn-group .btn {
-      display: inline-block;
-      padding: 15px 30px;
-      margin: 0 10px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-
-    .btn-primary {
-      background-color: var(--thu-purple); /* 主按钮清华紫 */
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background-color: var(--thu-purple-dark);
-      transform: translateY(-3px);
-    }
-
-    .btn-secondary {
-      background-color: var(--thu-purple-light); /* 副按钮浅清华紫 */
-      color: #fff;
-    }
-
-    .btn-secondary:hover {
-      background-color: var(--thu-purple);
-      transform: translateY(-3px);
-    }
-
-    /* About Summary */
-    .about-summary {
-      background-color: var(--bg-medium); /* 略带紫色的浅灰背景 */
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    .about-summary p {
-      max-width: 800px;
-      margin: 0 auto;
-      font-size: 1.1em;
-      color: var(--text-medium);
-    }
-
-    /* About Us Section */
-    .about-us-section {
-      background-color: var(--bg-light);
-      padding-bottom: 40px;
-    }
-
-    .about-us-content {
-      max-width: 900px;
-      margin: 0 auto;
-      font-size: 1.1em;
-      line-height: 1.8;
-      color: var(--text-medium);
-      text-align: justify;
-    }
-    .about-us-content ul {
-      list-style: disc; /* Keep default disc style for lists */
-      margin-left: 20px;
-      padding-left: 0;
-    }
-    .about-us-content ul li {
-      margin-bottom: 10px;
-    }
-
-    /* Achievements Section */
-    .achievements-section {
-      background-color: var(--bg-medium);
-    }
-
-    .achievement-category {
-      margin-bottom: 60px;
-    }
-
-    .achievement-category h3 {
-      font-size: 1.8em;
-      color: var(--thu-purple-dark);
-      margin-bottom: 30px;
-      position: relative;
-    }
-    .achievement-category h3::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 3px;
-      background-color: var(--thu-purple); /* 下划线使用清华紫 */
-      margin: 10px auto 0;
-      border-radius: 2px;
-    }
-
-    .achievement-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      transition: all 0.5s ease-out; /* Add transition for smooth collapse/expand */
-      overflow: hidden; /* Hide overflow when collapsed */
-    }
-
-    .achievement-item {
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: var(--shadow-medium);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* 关于我们 */
+    .about-content {
       display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
+      align-items: center;
+      gap: 40px;
+      text-align: left;
     }
 
-    .achievement-item:hover {
+    .about-image {
+      flex: 1;
+      max-width: 50%;
+      border-radius: 10px;
+      box-shadow: var(--shadow-medium);
+    }
+
+    .about-text {
+      flex: 1;
+      max-width: 50%;
+    }
+
+    .about-text h3 {
+      text-align: left;
+      margin-top: 0;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    /* 成果展示 */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .achievement-card {
+      background-color: var(--bg-light);
+      border-radius: 10px;
+      box-shadow: var(--shadow-light);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .achievement-card:hover {
       transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
     }
 
-    .achievement-thumbnail {
+    .achievement-card img {
       width: 100%;
       height: 200px;
-      background-color: #ecf0f1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.2em;
-      color: #7f8c8d;
-      overflow: hidden;
-    }
-    .achievement-thumbnail img {
-      width: 100%;
-      height: 100%;
       object-fit: cover;
+      display: block;
     }
 
-    .achievement-content {
-      padding: 25px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
+    .achievement-card-content {
+      padding: 20px;
     }
 
-    .achievement-content h4 {
-      font-size: 1.4em;
+    .achievement-card h3 {
       margin-top: 0;
       margin-bottom: 10px;
-      color: var(--text-dark);
-      text-align: left;
+      color: var(--primary-color);
+      font-size: 1.3em;
     }
 
-    .achievement-content .date {
-      font-size: 0.9em;
-      color: #7f8c8d;
-      margin-bottom: 10px;
-    }
-
-    .achievement-content .description {
-      font-size: 1em;
+    .achievement-card p {
+      font-size: 0.95em;
       color: var(--text-medium);
-      flex-grow: 1;
-      margin-bottom: 15px;
-    }
-
-    /* Styles for Project/Achievement Meta */
-    .project-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .project-phase {
-      background-color: var(--thu-purple-light); /* 期数标签使用浅清华紫 */
-      color: #fff;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 0.8em;
-      font-weight: bold;
-    }
-
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-top: 10px;
+      line-height: 1.5;
     }
 
     .project-tag {
-      background-color: var(--thu-purple); /* 默认标签使用清华紫 */
-      color: #fff;
-      padding: 3px 8px;
-      border-radius: 12px;
-      font-size: 0.75em;
-      white-space: nowrap;
-    }
-    /* Specific tag colors, ensure they contrast with text */
-    .project-tag.tag-poverty { background-color: #e74c3c; } /* Red for poverty */
-    .project-tag.tag-education { background-color: #8e44ad; } /* Darker purple for education */
-    .project-tag.tag-industry { background-color: #f39c12; color: #333; } /* Orange for industry, dark text */
-    .project-tag.tag-culture { background-color: #1abc9c; } /* Turquoise for culture */
-    .project-tag.tag-rural-construction { background-color: #27ae60; } /* Green for rural construction */
-
-    /* New styles for Expand/Collapse button */
-    .expand-btn-wrapper {
-      text-align: center;
-      margin-top: 30px;
-    }
-    .expand-btn {
-      background-color: var(--thu-purple);
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
+      display: inline-block;
+      background-color: var(--accent-color);
+      color: var(--text-light);
+      padding: 5px 10px;
       border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    .expand-btn:hover {
-      background-color: var(--thu-purple-dark);
-      transform: translateY(-2px);
+      font-size: 0.8em;
+      margin-top: 10px;
     }
 
-    /* Collapsed state for achievement grids */
-    .achievement-grid.collapsed {
-      max-height: 650px; /* Adjust based on your item height and initial count (e.g., 2 items high for 300px item + padding) */
-      /* This max-height needs to be calculated based on the height of your 3 visible items + gap */
-      /* For 3 items: (item_height * 1) + (gap * 0) to (item_height * 3) + (gap * 2) */
-      /* Assuming approx 250px per item + 30px gap for 3 items: 250*3 + 30*2 = 750 + 60 = 810px */
-      /* Let's try to make it fit 3 rows nicely, assuming 2 items per row on large screens or 1 on small */
-      /* The max-height value is a heuristic. For truly dynamic heights, JS might be needed to calculate. */
-    }
-    .achievement-grid.collapsed .achievement-item:nth-of-type(n+4) { /* Hide items from the 4th onwards */
-      display: none;
+    /* 成果分类容器 */
+    .category-section {
+      padding: 40px 0; /* 为每个小分类提供一些内边距 */
     }
 
-    /* Members Directory Section */
-    .members-section {
-      background-color: var(--bg-light);
+    .category-section h3 {
+      margin-bottom: 30px;
     }
 
-    .member-grid {
+    .category-section .expand-btn {
+      display: block;
+      margin: 30px auto 0;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      width: fit-content;
+      padding: 10px 25px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .category-section .expand-btn:hover {
+      background-color: var(--primary-dark);
+    }
+
+    /* 折叠/展开样式 - 适用于成员和成果网格 */
+    .member-grid,
+    .achievement-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      transition: all 0.5s ease-out; /* Smooth transition for expand/collapse */
-      overflow: hidden;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      overflow: hidden; /* **关键：隐藏超出部分** */
+      max-height: none; /* **默认不限制高度，显示所有内容** */
+      transition: max-height 0.7s ease-in-out; /* **平滑过渡效果** */
     }
 
+    /* 成员网格折叠状态 */
+    .member-grid.collapsed {
+      /* 假设每个成员卡片高度约 320px (含内边距和外边距)
+         显示4个成员 (2行): 320px * 2 + 20px (gap) = 660px */
+      max-height: 660px; /* 默认显示前4个成员卡片 */
+    }
+
+    /* 成果网格折叠状态 */
+    .achievement-grid.collapsed {
+      /* 假设每个成果卡片高度约 300px (含内边距和外边距)
+         显示3个成果 (1行，因为是300px minmax，通常会是三列或两列)
+         如果显示一行3个，高度就是卡片高度。如果 minmax 导致只有2列，则显示1行2个，半行第3个。
+         这里设置为大约1个半到2个卡片的高度，确保显示前3个 */
+      max-height: 350px; /* 默认显示前3个成果卡片 */
+    }
+
+
+    /* 成员通讯录 */
     .member-card {
-      background-color: #fdfdfd;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
-      padding: 30px;
+      background-color: var(--bg-light);
+      border-radius: 10px;
+      box-shadow: var(--shadow-light);
+      overflow: hidden;
       text-align: center;
+      padding: 20px;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      display: block;
     }
 
     .member-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-hover);
     }
 
     .member-photo-placeholder {
       width: 120px;
       height: 120px;
-      background-color: var(--thu-purple-light); /* 成员头像背景使用浅清华紫 */
+      background-color: var(--bg-medium);
       border-radius: 50%;
-      margin: 0 auto 20px;
+      margin: 0 auto 15px;
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #fff;
-      font-size: 1.5em;
-      overflow: hidden;
+      font-size: 3em;
+      color: var(--primary-color);
+      font-weight: bold;
+      border: 2px solid var(--border-color);
+      overflow: hidden; /* For actual images */
     }
+
     .member-photo-placeholder img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 50%;
     }
 
-    .member-card h4 {
+    .member-card h3 {
       margin-top: 0;
-      margin-bottom: 8px;
-      font-size: 1.6em;
-      color: var(--text-dark);
+      margin-bottom: 5px;
+      color: var(--primary-color);
+      font-size: 1.2em;
     }
 
     .member-card p {
-      font-size: 1.1em;
-      color: #7f8c8d;
-      margin-bottom: 0;
+      font-size: 0.9em;
+      color: var(--text-medium);
+      margin-bottom: 5px;
     }
 
-    .member-phase-tag {
-      display: inline-block;
-      background-color: var(--thu-purple);
-      color: #fff;
-      padding: 3px 8px;
-      border-radius: 12px;
-      font-size: 0.8em;
-      margin-top: 10px;
-      font-weight: 500;
+    .member-card .member-role {
+      font-weight: bold;
+      color: var(--text-dark);
     }
 
-    /* Collapsed state for members grid */
-    .member-grid.collapsed {
-      max-height: 380px; /* Adjust based on initial member card height (e.g., 2 rows of members) */
-    }
-    .member-grid.collapsed .member-card:nth-of-type(n+5) { /* Hide members from the 5th onwards (display first 4) */
-      display: none;
-    }
-
-
-    /* Member Detail Page */
-    .member-detail-overlay, .achievement-detail-overlay {
-      display: none; /* Hidden by default */
+    /* 详情弹窗 */
+    .overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.7);
-      z-index: 2000; /* Higher z-index for overlays */
+      display: flex;
       justify-content: center;
       align-items: center;
+      z-index: 2000;
+      visibility: hidden;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: visibility 0.3s, opacity 0.3s;
     }
 
-    .member-detail-overlay.active, .achievement-detail-overlay.active {
-      display: flex;
+    .overlay.active {
+      visibility: visible;
       opacity: 1;
     }
 
-    .member-detail-content, .achievement-detail-content {
-      background-color: #fff;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-      max-width: 700px;
-      width: 90%;
+    .detail-content {
+      background-color: var(--bg-light);
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 800px;
       max-height: 90vh;
       overflow-y: auto;
       position: relative;
-      transform: translateY(20px);
+      box-shadow: var(--shadow-medium);
+      transform: scale(0.9);
       transition: transform 0.3s ease;
     }
 
-    .member-detail-overlay.active .member-detail-content,
-    .achievement-detail-overlay.active .achievement-detail-content {
-      transform: translateY(0);
+    .overlay.active .detail-content {
+      transform: scale(1);
     }
 
-    .member-detail-content .back-link,
-    .achievement-detail-content .back-link {
-      display: inline-block;
-      margin-bottom: 25px;
-      color: var(--thu-purple); /* 返回链接使用清华紫 */
-      text-decoration: none;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .member-detail-content .back-link:hover,
-    .achievement-detail-content .back-link:hover {
-      text-decoration: underline;
-    }
-
-    .member-detail-photo {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background-color: var(--thu-purple-light); /* 详情页头像背景使用浅清华紫 */
-      margin: 0 auto 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      font-size: 2em;
-      overflow: hidden;
-    }
-    .member-detail-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .member-detail-content h3, .achievement-detail-content h3 {
-      font-size: 2.2em;
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.8em;
       color: var(--text-dark);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: var(--primary-color);
+    }
+
+    .detail-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .detail-content h3 {
+      text-align: left;
+      margin-top: 0;
+      color: var(--primary-color);
+    }
+
+    .detail-content p {
+      color: var(--text-medium);
       margin-bottom: 10px;
-      text-align: center;
     }
 
-    .member-detail-content .detail-role {
-      font-size: 1.3em;
-      color: #7f8c8d;
-      text-align: center;
-      margin-bottom: 25px;
-    }
-    .achievement-detail-content .detail-date-phase {
-      font-size: 1em;
-      color: #7f8c8d;
-      text-align: center;
+    .project-phase {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-size: 0.85em;
       margin-bottom: 15px;
+      font-weight: bold;
     }
 
-    .member-detail-content .detail-bio, .achievement-detail-content .detail-description {
-      font-size: 1.1em;
-      line-height: 1.7;
-      color: var(--text-medium);
-      text-align: justify;
-      margin-bottom: 30px;
-    }
-
-    .member-detail-content .contact-info, .achievement-detail-content .detail-tags {
+    /* 新增：联系我们章节 */
+    #contact-us {
+      background-color: var(--bg-medium);
       text-align: center;
-      font-size: 1em;
-      color: var(--text-medium);
+    }
+
+    #contact-us .contact-info {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
-      margin-top: 20px;
+      gap: 30px;
+      margin-top: 40px;
     }
 
-    .member-detail-content .contact-info a {
-      color: var(--thu-purple); /* 链接使用清华紫 */
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    #contact-us .contact-item {
+      background-color: var(--bg-light);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: var(--shadow-light);
+      width: calc(33% - 20px); /* 3列布局 */
+      min-width: 280px; /* 最小宽度 */
+      text-align: center;
     }
-    .member-detail-content .contact-info a:hover {
+
+    #contact-us .contact-item h3 {
+      color: var(--primary-color);
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    #contact-us .contact-item p,
+    #contact-us .contact-item a {
+      color: var(--text-dark);
+      font-size: 1.1em;
+      text-decoration: none;
+      line-height: 1.8;
+    }
+
+    #contact-us .contact-item a:hover {
+      color: var(--primary-dark);
       text-decoration: underline;
     }
 
-    .achievement-detail-content .detail-image-placeholder {
-      width: 100%;
-      height: 250px;
-      background-color: #eee;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #7f8c8d;
-      font-size: 1.1em;
-      margin-bottom: 30px;
-      overflow: hidden;
-    }
-    .achievement-detail-content .detail-image-placeholder img,
-    .achievement-detail-content .detail-image-placeholder iframe {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border: none;
+    #contact-us .qr-code img {
+      border: 1px solid var(--border-color);
     }
 
-    /* Footer */
+    /* 页脚 */
     footer {
-      background-color: var(--thu-purple-dark); /* 页脚使用深清华紫 */
+      background-color: var(--text-dark); /* 深色页脚 */
       color: var(--text-light);
       text-align: center;
-      padding: 40px 20px;
+      padding: 40px 0;
       font-size: 0.9em;
     }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
+    footer p {
+      margin: 0;
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 992px) {
+      .hero-section {
+        height: 500px;
+      }
       h1 {
-        font-size: 2em;
+        font-size: 2.2em;
       }
       h2 {
         font-size: 1.8em;
       }
-      .header-title {
-        font-size: 1.2em;
-      }
-      nav ul {
-        display: none; /* Hide desktop nav */
-        flex-direction: column;
-        width: 100%;
-        text-align: center;
-        background-color: #fff;
-        position: absolute;
-        top: 80px; /* Adjust based on header height */
-        left: 0;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-      }
-      nav ul.active {
-        display: flex;
-      }
       nav ul li {
-        margin: 0;
-        padding: 15px 0;
-        border-bottom: 1px solid #eee;
+        margin-left: 20px;
       }
-      nav ul li:last-child {
-        border-bottom: none;
+      .about-content {
+        flex-direction: column;
+        text-align: center;
       }
-      nav ul li a {
-        display: block;
+      .about-image, .about-text {
+        max-width: 100%;
       }
-      .menu-toggle {
-        display: flex;
+      .about-text h3 {
+        text-align: center;
       }
+      #contact-us .contact-item {
+        width: calc(50% - 15px); /* 2列布局 */
+      }
+    }
+
+    @media (max-width: 768px) {
       .hero-section {
-        padding: 100px 20px;
+        height: 400px;
       }
-      .hero-section h1 {
-        font-size: 2.5em;
-      }
-      .hero-section p {
-        font-size: 1.2em;
-      }
-      .btn-group .btn {
-        display: block;
-        margin: 15px auto;
-        width: 80%;
-      }
-      .about-us-content {
-        padding: 0 10px;
-      }
-      .achievement-grid, .member-grid {
-        grid-template-columns: 1fr;
-      }
-      section {
-        padding: 60px 0;
-      }
-      .member-detail-content, .achievement-detail-content {
-        padding: 20px;
-        width: 95%;
-      }
-      .member-detail-photo {
-        width: 150px;
-        height: 150px;
-      }
-      .member-detail-content h3, .achievement-detail-content h3 {
+      h1 {
         font-size: 1.8em;
       }
-      .member-detail-content .detail-role {
-        font-size: 1.1em;
+      h2 {
+        font-size: 1.5em;
       }
-      .member-detail-content .detail-bio, .achievement-detail-content .detail-description {
-        font-size: 1em;
+      .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
       }
-
-      /* Adjust collapsed height for mobile if needed */
-      .achievement-grid.collapsed {
-        max-height: 600px; /* For 2 items on mobile */
+      nav {
+        order: 1; /* 导航排在下方 */
+        width: 100%;
+        margin-top: 15px;
       }
-      .member-grid.collapsed {
-        max-height: 600px; /* For 2 items on mobile */
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        display: none; /* 默认隐藏 */
+      }
+      nav ul.active {
+        display: flex; /* 激活时显示 */
+      }
+      nav ul li {
+        margin: 10px 0;
+      }
+      .menu-toggle {
+        display: flex; /* 显示汉堡菜单 */
+        position: absolute;
+        right: 20px;
+        top: 25px;
+      }
+      .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+      .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+      .achievements-grid,
+      .member-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+      .detail-content {
+        margin: 20px;
+        max-height: 85vh;
+      }
+      #contact-us .contact-item {
+        width: 100%; /* 1列布局 */
       }
     }
   </style>
 </head>
 <body>
-
 <header>
-  <div class="container header-content">
-    <div class="logo-title">
-      <div class="logo-placeholder">清华</div>
-      <div class="header-title">清华大学怀化溆浦乡村振兴工作站</div>
-    </div>
+  <div class="container navbar">
+    <a href="#" class="logo">清华大学怀化溆浦乡村振兴工作站</a>
     <nav>
       <ul id="main-nav">
         <li><a href="#home">首页</a></li>
-        <li><a href="#about-us">工作站简介</a></li>
+        <li><a href="#about-us">关于我们</a></li>
         <li><a href="#achievements">历次实践成果</a></li>
         <li><a href="#members">成员通讯录</a></li>
-      </ul>
-      <div class="menu-toggle" id="mobile-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+        <li><a href="#contact-us">联系我们</a></li> </ul>
     </nav>
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
   </div>
 </header>
 
 <main>
   <section id="home" class="hero-section">
     <div class="carousel-container">
-      <div class="carousel-image active" style="background-image: url('https://via.placeholder.com/1500x800/663399/ffffff?text=清华大学主楼');"></div>
-      <div class="carousel-image" style="background-image: url('https://via.placeholder.com/1500x800/800080/ffffff?text=清华校园风光');"></div>
-      <div class="carousel-image" style="background-image: url('https://via.placeholder.com/1500x800/4d2673/ffffff?text=乡村实践场景');"></div>
-      <div class="carousel-image" style="background-image: url('https://via.placeholder.com/1500x800/9966cc/ffffff?text=清华校训石');"></div>
+      <div class="carousel-slide active" style="background-image: url('https://via.placeholder.com/1920x1080/007bff/FFFFFF?text=清华大学校园风光1');"></div>
+      <div class="carousel-slide" style="background-image: url('https://via.placeholder.com/1920x1080/28a745/FFFFFF?text=清华大学乡村实践2');"></div>
+      <div class="carousel-slide" style="background-image: url('https://via.placeholder.com/1920x1080/343a40/FFFFFF?text=清华大学标志建筑3');"></div>
+      <div class="carousel-slide" style="background-image: url('https://via.placeholder.com/1920x1080/6c757d/FFFFFF?text=清华大学日常学习4');"></div>
     </div>
-    <button class="carousel-nav-btn carousel-prev" aria-label="Previous image">&#10094;</button>
-    <button class="carousel-nav-btn carousel-next" aria-label="Next image">&#10095;</button>
-    <div class="carousel-indicators"></div>
-
     <div class="container">
       <h1>清华大学怀化溆浦乡村振兴工作站</h1>
-      <p>智力赋能乡村，实践共筑未来</p>
-      <div class="btn-group">
-        <a href="#about-us" class="btn btn-primary">了解更多</a>
-        <a href="#achievements" class="btn btn-secondary">查看实践成果</a>
+      <p>扎根乡土，学以致用，助力乡村全面振兴。</p>
+      <a href="#about-us" class="btn btn-primary">了解更多</a>
+    </div>
+    <div class="carousel-nav">
+      <button id="prevBtn">&lt;</button>
+      <button id="nextBtn">&gt;</button>
+    </div>
+    <div class="carousel-indicators" id="carouselIndicators">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </section>
+
+  <section id="about-us" class="container">
+    <h2>关于我们</h2>
+    <div class="about-content">
+      <img src="https://via.placeholder.com/600x400/007bff/FFFFFF?text=团队照片" alt="团队照片" class="about-image">
+      <div class="about-text">
+        <h3>我们的使命与愿景</h3>
+        <p>清华大学怀化溆浦乡村振兴工作站致力于通过发挥高校智力优势，结合当地实际需求，在乡村规划、产业发展、文化传承、人才培养等方面提供支持与服务。我们希望通过持续的努力，将理论知识转化为实践成果，为溆浦乃至更广阔的乡村地区注入新的活力，共同描绘乡村振兴的美好蓝图。</p>
+        <p>工作站由清华大学师生与地方政府紧密合作，共同探索可持续发展模式，力求在推动经济发展的同时，保护生态环境，传承乡土文化，提升村民福祉，实现人与自然、人与社会的和谐共生。</p>
+        <a href="#" class="btn btn-secondary">阅读更多</a>
       </div>
     </div>
   </section>
 
-  <section class="about-summary">
-    <div class="container">
-      <h2>工作站简介</h2>
-      <p>清华大学怀化溆浦乡村振兴工作站，秉承清华大学服务国家战略的使命，致力于将前沿理论与乡村实际相结合，通过深入调研、专业规划、技术指导和人才培养，赋能怀化溆浦地区的乡村振兴事业，助力构建产业兴旺、生态宜居、乡风文明、治理有效、生活富裕的美丽乡村。</p>
+  <section id="achievements" class="container">
+    <h2>历次实践成果</h2>
+
+    <section id="projects" class="category-section">
+      <h3>落地项目</h3>
+      <div class="achievement-grid">
+        <div class="achievement-card" data-id="project1">
+          <img src="https://via.placeholder.com/400x200/007bff/FFFFFF?text=项目1" alt="落地项目1">
+          <div class="achievement-card-content">
+            <h3>智慧农业示范基地</h3>
+            <p>引入先进农业技术，提升农作物产量与品质。</p>
+            <span class="project-tag">农业创新</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="project2">
+          <img src="https://via.placeholder.com/400x200/28a745/FFFFFF?text=项目2" alt="落地项目2">
+          <div class="achievement-card-content">
+            <h3>乡村旅游路线开发</h3>
+            <p>规划并建设多条特色旅游线路，带动当地经济。</p>
+            <span class="project-tag">文旅融合</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="project3">
+          <img src="https://via.placeholder.com/400x200/343a40/FFFFFF?text=项目3" alt="落地项目3">
+          <div class="achievement-card-content">
+            <h3>传统村落活化保护</h3>
+            <p>修缮古建筑，传承非物质文化遗产。</p>
+            <span class="project-tag">文化保护</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="project4">
+          <img src="https://via.placeholder.com/400x200/6c757d/FFFFFF?text=项目4" alt="落地项目4">
+          <div class="achievement-card-content">
+            <h3>教育帮扶与人才培养</h3>
+            <p>开展支教活动，提升乡村教育水平。</p>
+            <span class="project-tag">教育公益</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="project5">
+          <img src="https://via.placeholder.com/400x200/f2f6fc/007bff?text=项目5" alt="落地项目5">
+          <div class="achievement-card-content">
+            <h3>生态农业循环经济</h3>
+            <p>推广有机种植，构建绿色可持续农业系统。</p>
+            <span class="project-tag">生态环保</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="project6">
+          <img src="https://via.placeholder.com/400x200/007bff/FFFFFF?text=项目6" alt="落地项目6">
+          <div class="achievement-card-content">
+            <h3>乡村医疗健康服务</h3>
+            <p>引进远程医疗技术，改善基层医疗条件。</p>
+            <span class="project-tag">医疗健康</span>
+          </div>
+        </div>
+      </div>
+      <button class="expand-btn" data-target="projects">查看更多成果</button>
+    </section>
+
+    <section id="designs" class="category-section">
+      <h3>设计成果</h3>
+      <div class="achievement-grid">
+        <div class="achievement-card" data-id="design1">
+          <img src="https://via.placeholder.com/400x200/28a745/FFFFFF?text=设计1" alt="设计成果1">
+          <div class="achievement-card-content">
+            <h3>村落景观规划设计</h3>
+            <p>为多个村落提供整体景观提升方案。</p>
+            <span class="project-tag">环境设计</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="design2">
+          <img src="https://via.placeholder.com/400x200/007bff/FFFFFF?text=设计2" alt="设计成果2">
+          <div class="achievement-card-content">
+            <h3>农产品包装设计</h3>
+            <p>提升当地特色农产品品牌形象。</p>
+            <span class="project-tag">品牌设计</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="design3">
+          <img src="https://via.placeholder.com/400x200/343a40/FFFFFF?text=设计3" alt="设计成果3">
+          <div class="achievement-card-content">
+            <h3>民宿建筑改造设计</h3>
+            <p>将废弃农房改造为具有地方特色的精品民宿。</p>
+            <span class="project-tag">建筑设计</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="design4">
+          <img src="https://via.placeholder.com/400x200/6c757d/FFFFFF?text=设计4" alt="设计成果4">
+          <div class="achievement-card-content">
+            <h3>乡村公共空间设计</h3>
+            <p>设计儿童游乐区、文化广场等公共空间。</p>
+            <span class="project-tag">公共空间</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="design5">
+          <img src="https://via.placeholder.com/400x200/f2f6fc/007bff?text=设计5" alt="设计成果5">
+          <div class="achievement-card-content">
+            <h3>文创产品研发设计</h3>
+            <p>结合当地文化元素，开发系列文创商品。</p>
+            <span class="project-tag">文创产品</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="design6">
+          <img src="https://via.placeholder.com/400x200/28a745/FFFFFF?text=设计6" alt="设计成果6">
+          <div class="achievement-card-content">
+            <h3>乡村导视系统设计</h3>
+            <p>优化乡村道路标识和旅游导览系统。</p>
+            <span class="project-tag">导视系统</span>
+          </div>
+        </div>
+      </div>
+      <button class="expand-btn" data-target="designs">查看更多成果</button>
+    </section>
+
+    <section id="propaganda" class="category-section">
+      <h3>宣传成果</h3>
+      <div class="achievement-grid">
+        <div class="achievement-card" data-id="propaganda1">
+          <img src="https://via.placeholder.com/400x200/343a40/FFFFFF?text=宣传1" alt="宣传成果1">
+          <div class="achievement-card-content">
+            <h3>乡村振兴纪录片</h3>
+            <p>制作反映工作站实践历程的纪录片。</p>
+            <span class="project-tag">视频制作</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="propaganda2">
+          <img src="https://via.placeholder.com/400x200/007bff/FFFFFF?text=宣传2" alt="宣传成果2">
+          <div class="achievement-card-content">
+            <h3>地方文化宣传册</h3>
+            <p>设计并发行溆浦文化旅游宣传册。</p>
+            <span class="project-tag">平面设计</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="propaganda3">
+          <img src="https://via.placeholder.com/400x200/28a745/FFFFFF?text=宣传3" alt="宣传成果3">
+          <div class="achievement-card-content">
+            <h3>新媒体运营策略</h3>
+            <p>协助当地政府搭建并运营新媒体平台。</p>
+            <span class="project-tag">新媒体</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="propaganda4">
+          <img src="https://via.placeholder.com/400x200/6c757d/FFFFFF?text=宣传4" alt="宣传成果4">
+          <div class="achievement-card-content">
+            <h3>乡村故事征集与出版</h3>
+            <p>挖掘乡村故事，出版口述历史文集。</p>
+            <span class="project-tag">内容创作</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="propaganda5">
+          <img src="https://via.placeholder.com/400x200/f2f6fc/007bff?text=宣传5" alt="宣传成果5">
+          <div class="achievement-card-content">
+            <h3>主题摄影展策划</h3>
+            <p>举办以乡村振兴为主题的摄影展览。</p>
+            <span class="project-tag">艺术策展</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="propaganda6">
+          <img src="https://via.placeholder.com/400x200/007bff/FFFFFF?text=宣传6" alt="宣传成果6">
+          <div class="achievement-card-content">
+            <h3>社区活动推广方案</h3>
+            <p>为乡村文化活动提供宣传推广方案。</p>
+            <span class="project-tag">活动策划</span>
+          </div>
+        </div>
+      </div>
+      <button class="expand-btn" data-target="propaganda">查看更多成果</button>
+    </section>
+
+    <section id="reports" class="category-section">
+      <h3>调研报告成果</h3>
+      <div class="achievement-grid">
+        <div class="achievement-card" data-id="report1">
+          <img src="https://via.placeholder.com/400x200/6c757d/FFFFFF?text=报告1" alt="调研报告1">
+          <div class="achievement-card-content">
+            <h3>乡村产业发展潜力报告</h3>
+            <p>深入分析当地产业现状与发展潜力。</p>
+            <span class="project-tag">产业研究</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="report2">
+          <img src="https://via.placeholder.com/400x200/007bff/FFFFFF?text=报告2" alt="调研报告2">
+          <div class="achievement-card-content">
+            <h3>农村人居环境现状调研</h3>
+            <p>评估乡村居住环境，提出改善建议。</p>
+            <span class="project-tag">环境调研</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="report3">
+          <img src="https://via.placeholder.com/400x200/28a745/FFFFFF?text=报告3" alt="调研报告3">
+          <div class="achievement-card-content">
+            <h3>乡村振兴青年人才流失调查</h3>
+            <p>分析乡村青年人才流失原因及对策。</p>
+            <span class="project-tag">人才研究</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="report4">
+          <img src="https://via.placeholder.com/400x200/343a40/FFFFFF?text=报告4" alt="调研报告4">
+          <div class="achievement-card-content">
+            <h3>数字乡村建设可行性报告</h3>
+            <p>探讨数字技术在乡村建设中的应用前景。</p>
+            <span class="project-tag">数字乡村</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="report5">
+          <img src="https://via.placeholder.com/400x200/f2f6fc/007bff?text=报告5" alt="调研报告5">
+          <div class="achievement-card-content">
+            <h3>文化旅游资源开发评估</h3>
+            <p>对溆浦文化旅游资源进行全面评估。</p>
+            <span class="project-tag">旅游评估</span>
+          </div>
+        </div>
+        <div class="achievement-card" data-id="report6">
+          <img src="https://via.placeholder.com/400x200/007bff/FFFFFF?text=报告6" alt="调研报告6">
+          <div class="achievement-card-content">
+            <h3>乡村治理体系现代化研究</h3>
+            <p>分析乡村治理现状，提出现代化治理策略。</p>
+            <span class="project-tag">乡村治理</span>
+          </div>
+        </div>
+      </div>
+      <button class="expand-btn" data-target="reports">查看更多成果</button>
+    </section>
+  </section>
+
+  <section id="members" class="category-section container">
+    <h2>成员通讯录</h2>
+    <div class="member-grid">
+      <div class="member-card" data-id="member1">
+        <div class="member-photo-placeholder">
+          <img src="https://via.placeholder.com/120/007bff/FFFFFF?text=张" alt="张三">
+        </div>
+        <h3>张三</h3>
+        <p class="member-role">项目负责人</p>
+        <p>清华大学XXXX学院</p>
+      </div>
+      <div class="member-card" data-id="member2">
+        <div class="member-photo-placeholder">
+          <img src="https://via.placeholder.com/120/28a745/FFFFFF?text=李" alt="李四">
+        </div>
+        <h3>李四</h3>
+        <p class="member-role">技术指导</p>
+        <p>清华大学XXXX研究院</p>
+      </div>
+      <div class="member-card" data-id="member3">
+        <div class="member-photo-placeholder">
+          <img src="https://via.placeholder.com/120/343a40/FFFFFF?text=王" alt="王五">
+        </div>
+        <h3>王五</h3>
+        <p class="member-role">设计骨干</p>
+        <p>清华大学XXXX系</p>
+      </div>
+      <div class="member-card" data-id="member4">
+        <div class="member-photo-placeholder">
+          <img src="https://via.placeholder.com/120/6c757d/FFFFFF?text=赵" alt="赵六">
+        </div>
+        <h3>赵六</h3>
+        <p class="member-role">宣传专员</p>
+        <p>清华大学XXXX专业</p>
+      </div>
+      <div class="member-card" data-id="member5">
+        <div class="member-photo-placeholder">
+          <img src="https://via.placeholder.com/120/f2f6fc/007bff?text=孙" alt="孙七">
+        </div>
+        <h3>孙七</h3>
+        <p class="member-role">调研分析师</p>
+        <p>清华大学XXXX学院</p>
+      </div>
+      <div class="member-card" data-id="member6">
+        <div class="member-photo-placeholder">
+          <img src="https://via.placeholder.com/120/007bff/FFFFFF?text=周" alt="周八">
+        </div>
+        <h3>周八</h3>
+        <p class="member-role">基层协调员</p>
+        <p>清华大学XXXX部</p>
+      </div>
+      <div class="member-card" data-id="member7">
+        <div class="member-photo-placeholder">
+          <img src="https://via.placeholder.com/120/28a745/FFFFFF?text=吴" alt="吴九">
+        </div>
+        <h3>吴九</h3>
+        <p class="member-role">志愿者</p>
+        <p>清华大学XXXX协会</p>
+      </div>
+    </div>
+    <button class="expand-btn" data-target="members">查看更多成员</button>
+  </section>
+
+  <section id="contact-us" class="container">
+    <h2>联系我们</h2>
+    <p>如果您对我们的工作有任何疑问、建议或合作意向，欢迎随时联系我们。</p>
+    <div class="contact-info">
+      <div class="contact-item">
+        <h3>电话</h3>
+        <p>XXX-XXXX-XXXX</p>
+      </div>
+      <div class="contact-item">
+        <h3>邮箱</h3>
+        <p>contact@example.com</p>
+      </div>
+      <div class="contact-item">
+        <h3>网站</h3>
+        <p><a href="https://www.example.com" target="_blank">www.example.com</a></p>
+      </div>
+      <div class="contact-item qr-code">
+        <h3>微信公众号</h3>
+        <p>清华乡村振兴</p>
+        <img src="https://via.placeholder.com/150/007bff/FFFFFF?text=公众号二维码" alt="微信公众号二维码" style="width: 150px; height: 150px; display: block; margin: 15px auto;">
+      </div>
     </div>
   </section>
 
-  <section id="about-us" class="about-us-section">
-    <div class="container">
-      <h2 style="margin-bottom: 20px;">工作站简介</h2>
-      <div class="about-us-content">
-        <p>清华大学怀化溆浦乡村振兴工作站的成立，是清华大学积极响应国家乡村振兴战略，发挥高校智力优势的重要举措。工作站旨在搭建一个集教学、科研、社会实践于一体的综合平台，深度参与怀化溆浦地区的乡村发展。</p>
-        <p>我们的主要目标包括：</p>
-        <ul>
-          <li>深入乡村进行实地调研，系统梳理乡村发展面临的挑战与机遇。</li>
-          <li>结合地方特色，提供科学合理的乡村规划、产业发展、生态保护等方面的专业咨询和设计方案。</li>
-          <li>开展形式多样的技术培训和人才培养项目，提升乡村基层干部和村民的综合素质与发展能力。</li>
-          <li>推动产学研深度融合，引导科研成果在乡村落地转化，促进乡村经济多元化发展。</li>
-          <li>传承和弘扬优秀乡土文化，助力乡村精神文明建设。</li>
-        </ul>
-        <p>自成立以来，工作站汇聚了清华大学多个院系的专家教授、青年教师和优秀学生，组建了多支实践支队，在溆浦乡村的土地上留下了坚实的足迹和丰硕的成果。我们坚持问题导向、需求导向，与当地政府和村民紧密合作，共同探索乡村振兴的可持续发展模式，为溆浦乃至更广泛地区的乡村振兴贡献清华智慧和力量。</p>
-        <p>（可在此处插入相关图片或图表，例如：工作站成员合影、乡村调研照片、项目规划图等，此处为文字占位）</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="achievements" class="achievements-section">
-    <div class="container">
-      <h2>历次实践成果</h2>
-
-      <div class="achievement-category" id="category-implemented-projects">
-        <h3>落地项目</h3>
-        <div class="achievement-grid">
-          <a href="#achievement-detail-project-1" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/9b59b6/ffffff?text=Project+1" alt="落地项目1"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>溆浦村文化广场改造项目</h4>
-                <span class="project-phase">第一期</span>
-              </div>
-              <p class="date">发布日期：2024年05月10日</p>
-              <p class="description">成功完成溆浦村中心文化广场的规划设计与施工监督，提升村民休闲娱乐空间。</p>
-              <div class="project-tags">
-                <span class="project-tag tag-rural-construction">乡村建设</span>
-                <span class="project-tag tag-culture">文化提升</span>
-              </div>
-            </div>
-          </a>
-          <a href="#achievement-detail-project-2" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/3498db/ffffff?text=Project+2" alt="落地项目2"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>农产品品牌孵化与电商平台搭建</h4>
-                <span class="project-phase">第二期</span>
-              </div>
-              <p class="date">发布日期：2024年03月22日</p>
-              <p class="description">协助当地农户建立“溆浦优选”品牌，并对接线上销售渠道，初见成效。</p>
-              <div class="project-tags">
-                <span class="project-tag tag-industry">产业发展</span>
-                <span class="project-tag tag-poverty">扶贫项目</span>
-              </div>
-            </div>
-          </a>
-          <a href="#achievement-detail-project-3" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/2ecc71/ffffff?text=Project+3" alt="落地项目3"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>乡村民宿示范点改造工程</h4>
-                <span class="project-phase">第一期</span>
-              </div>
-              <p class="date">发布日期：2023年11月18日</p>
-              <p class="description">对溆浦村一处闲置民居进行现代化改造，打造成为具有当地特色的乡村民宿样板。</p>
-              <div class="project-tags">
-                <span class="project-tag tag-industry">旅游开发</span>
-                <span class="project-tag tag-poverty">增收</span>
-              </div>
-            </div>
-          </a>
-          <a href="#achievement-detail-project-4" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/e74c3c/ffffff?text=Project+4" alt="落地项目4"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>溆浦村饮水安全提升工程</h4>
-                <span class="project-phase">第二期</span>
-              </div>
-              <p class="date">发布日期：2023年09月05日</p>
-              <p class="description">对溆浦村部分老旧供水管网进行改造升级，确保村民饮水安全。</p>
-              <div class="project-tags">
-                <span class="project-tag tag-poverty">民生改善</span>
-                <span class="project-tag tag-rural-construction">基础设施</span>
-              </div>
-            </div>
-          </a>
-          <a href="#achievement-detail-project-5" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/f39c12/ffffff?text=Project+5" alt="落地项目5"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>青少年乡村研学基地建设</h4>
-                <span class="project-phase">第一期</span>
-              </div>
-              <p class="date">发布日期：2023年07月10日</p>
-              <p class="description">利用当地自然资源，规划并建设青少年研学实践基地，推广乡村教育。</p>
-              <div class="project-tags">
-                <span class="project-tag tag-education">教育帮扶</span>
-                <span class="project-tag tag-culture">文旅融合</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="expand-btn-wrapper">
-          <button class="expand-btn" data-target="category-implemented-projects">查看更多</button>
-        </div>
-      </div>
-
-      <div class="achievement-category" id="category-design-results">
-        <h3>设计成果</h3>
-        <div class="achievement-grid">
-          <a href="#achievement-detail-design-1" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/e67e22/ffffff?text=Design+1" alt="设计成果1"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>溆浦村全域旅游景观规划</h4>
-                <span class="project-phase">第二期</span>
-              </div>
-              <p class="date">发布日期：2024年01月15日</p>
-              <p class="description">提出溆浦村生态旅游发展概念规划，涵盖景点布局、游线设计、配套设施等。</p>
-              <div class="project-tags">
-                <span class="project-tag tag-industry">旅游规划</span>
-                <span class="project-tag tag-culture">生态设计</span>
-              </div>
-            </div>
-          </a>
-          <a href="#achievement-detail-design-2" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/f1c40f/ffffff?text=Design+2" alt="设计成果2"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>乡土建筑改造设计导则</h4>
-                <span class="project-phase">第一期</span>
-              </div>
-              <p class="date">发布日期：2023年09月01日</p>
-              <p class="description">编制溆浦地区乡土建筑保护与更新设计指南，指导村民进行房屋改造。</p>
-              <div class="project-tags">
-                <span class="project-tag tag-industry">建筑设计</span>
-                <span class="project-tag tag-culture">文化传承</span>
-              </div>
-            </div>
-          </a>
-          <a href="#achievement-detail-design-3" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/34495e/ffffff?text=Design+3" alt="设计成果3"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>溆浦村公共空间艺术介入方案</h4>
-                <span class="project-phase">第二期</span>
-              </div>
-              <p class="date">发布日期：2024年03月01日</p>
-              <p class="description">设计一系列融入乡村元素的公共艺术装置，提升村庄美学氛围。</p>
-              <div class="project-tags">
-                <span class="project-tag tag-culture">公共艺术</span>
-                <span class="project-tag">空间活化</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="expand-btn-wrapper">
-          <button class="expand-btn" data-target="category-design-results">查看更多</button>
-        </div>
-      </div>
-
-      <div class="achievement-category" id="category-promotion-results">
-        <h3>宣传成果</h3>
-        <div class="achievement-grid">
-          <a href="#achievement-detail-promotion-1" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/c0392b/ffffff?text=Promotion+1" alt="宣传成果1"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>《溆浦乡村振兴纪实》系列短视频发布</h4>
-                <span class="project-phase">第一期</span>
-              </div>
-              <p class="date">发布日期：2023年07月20日</p>
-              <p class="description">通过多媒体形式记录工作站实践过程及溆浦村庄变化，引起广泛关注。</p>
-              <div class="project-tags">
-                <span class="project-tag tag-culture">媒体传播</span>
-                <span class="project-tag">品牌建设</span>
-              </div>
-            </div>
-          </a>
-          <a href="#achievement-detail-promotion-2" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/8e44ad/ffffff?text=Promotion+2" alt="宣传成果2"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>“清华与溆浦”主题展览在校内展出</h4>
-                <span class="project-phase">第一期</span>
-              </div>
-              <p class="date">发布日期：2023年05月12日</p>
-              <p class="description">通过图文并茂的形式，向清华师生和社会各界介绍溆浦工作站的实践成果。</p>
-              <div class="project-tags">
-                <span class="project-tag tag-education">校际交流</span>
-                <span class="project-tag">社会影响</span>
-              </div>
-            </div>
-          </a>
-          <a href="#achievement-detail-promotion-3" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/16a085/ffffff?text=Promotion+3" alt="宣传成果3"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>溆浦乡村振兴主题宣传册制作与发行</h4>
-                <span class="project-phase">第二期</span>
-              </div>
-              <p class="date">发布日期：2024年04月10日</p>
-              <p class="description">设计并印刷精美宣传册，用于对外推广溆浦乡村振兴模式。</p>
-              <div class="project-tags">
-                <span class="project-tag">形象塑造</span>
-                <span class="project-tag">旅游推广</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="expand-btn-wrapper">
-          <button class="expand-btn" data-target="category-promotion-results">查看更多</button>
-        </div>
-      </div>
-
-      <div class="achievement-category" id="category-research-reports">
-        <h3>调研报告类</h3>
-        <div class="achievement-grid">
-          <a href="#achievement-detail-report-1" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/1abc9c/ffffff?text=Report+1" alt="调研报告1"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>溆浦村社会经济发展现状调研报告</h4>
-                <span class="project-phase">第一期</span>
-              </div>
-              <p class="date">发布日期：2024年04月01日</p>
-              <p class="description">全面分析溆浦村人口结构、产业构成、收入水平及公共服务现状。</p>
-              <div class="project-tags">
-                <span class="project-tag">数据分析</span>
-                <span class="project-tag tag-poverty">发展评估</span>
-              </div>
-            </div>
-          </a>
-          <a href="#achievement-detail-report-2" class="achievement-item">
-            <div class="achievement-thumbnail"><img src="https://via.placeholder.com/400x200/34495e/ffffff?text=Report+2" alt="调研报告2"></div>
-            <div class="achievement-content">
-              <div class="project-meta">
-                <h4>溆浦地区特色农产品市场潜力分析报告</h4>
-                <span class="project-phase">第二期</span>
-              </div>
-              <p class="date">发布日期：2023年10月25日</p>
-              <p class="description">评估溆浦地区农产品市场竞争力，提出品牌建设和销售渠道拓展建议。</p>
-              <div class="project-tags">
-                <span class="project-tag tag-industry">市场研究</span>
-                <span class="project-tag">农业发展</span>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="expand-btn-wrapper">
-          <button class="expand-btn" data-target="category-research-reports">查看更多</button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="members" class="members-section">
-    <div class="container">
-      <h2>成员通讯录</h2>
-      <div class="member-grid-container"> <div class="member-grid">
-        <a href="#member-detail-wang" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/7f8c8d/ffffff?text=王教授" alt="成员头像"></div>
-          <h4>王教授</h4>
-          <p>工作站站长 / 乡村发展专家</p>
-          <p class="member-phase-tag">第一期实践支队</p>
-        </a>
-        <a href="#member-detail-li" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/bdc3c7/ffffff?text=李老师" alt="成员头像"></div>
-          <h4>李老师</h4>
-          <p>指导老师 / 建筑学院</p>
-          <p class="member-phase-tag">第一期 & 第二期实践支队</p>
-        </a>
-        <a href="#member-detail-zhang" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/95a5a6/ffffff?text=张明" alt="成员头像"></div>
-          <h4>张明</h4>
-          <p>核心成员 / 研究生</p>
-          <p class="member-phase-tag">第二期实践支队</p>
-        </a>
-        <a href="#member-detail-chen" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/c1c1c1/ffffff?text=陈芳" alt="成员头像"></div>
-          <h4>陈芳</h4>
-          <p>核心成员 / 本科生</p>
-          <p class="member-phase-tag">第一期实践支队</p>
-        </a>
-        <a href="#member-detail-zhao" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/888888/ffffff?text=赵强" alt="成员头像"></div>
-          <h4>赵强</h4>
-          <p>志愿者代表</p>
-          <p class="member-phase-tag">第二期实践支队</p>
-        </a>
-        <a href="#member-detail-liu" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/a9a9a9/ffffff?text=刘华" alt="成员头像"></div>
-          <h4>刘华</h4>
-          <p>联络协调员</p>
-          <p class="member-phase-tag">第一期实践支队</p>
-        </a>
-        <a href="#member-detail-sun" class="member-card">
-          <div class="member-photo-placeholder"><img src="https://via.placeholder.com/120/d3d3d3/ffffff?text=孙悦" alt="成员头像"></div>
-          <h4>孙悦</h4>
-          <p>财务管理</p>
-          <p class="member-phase-tag">第二期实践支队</p>
-        </a>
-      </div>
-        <div class="expand-btn-wrapper">
-          <button class="expand-btn" id="toggle-members-btn" data-target="member-grid">查看更多成员</button>
-        </div>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer>
   <div class="container">
-    <p>© 2025 清华大学怀化溆浦乡村振兴工作站. All Rights Reserved.</p>
+    <p>&copy; 2025 清华大学怀化溆浦乡村振兴工作站. All Rights Reserved.</p>
   </div>
 </footer>
 
-<div id="member-detail-overlay" class="member-detail-overlay">
-  <div class="member-detail-content">
-    <a href="#members" class="back-link" id="back-to-members-link">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5a.5.5 0 0 0 .5-.5z"/>
-      </svg>
-      返回成员通讯录
-    </a>
-    <div id="member-detail-card">
-    </div>
+<div id="member-detail-overlay" class="overlay">
+  <div class="detail-content">
+    <button class="close-btn">&times;</button>
+    <img src="" alt="成员照片" class="detail-image" id="member-detail-photo">
+    <h3 id="member-detail-name"></h3>
+    <p><strong id="member-detail-role"></strong></p>
+    <p id="member-detail-bio"></p>
   </div>
 </div>
 
-<div id="achievement-detail-overlay" class="achievement-detail-overlay">
-  <div class="achievement-detail-content">
-    <a href="#achievements" class="back-link" id="back-to-achievements-link">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5a.5.5 0 0 0 .5-.5z"/>
-      </svg>
-      返回实践成果
-    </a>
-    <div id="achievement-detail-card">
-    </div>
+<div id="achievement-detail-overlay" class="overlay">
+  <div class="detail-content">
+    <button class="close-btn">&times;</button>
+    <img src="" alt="成果图片" class="detail-image" id="achievement-detail-image">
+    <span class="project-phase" id="achievement-detail-phase"></span>
+    <h3 id="achievement-detail-title"></h3>
+    <p id="achievement-detail-description"></p>
   </div>
 </div>
 
 <script>
-  // --- Global Constants & Mobile Menu Toggle ---
-  const INITIAL_ACHIEVEMENT_DISPLAY_COUNT = 3; // Number of items to show initially in achievement categories
-  const INITIAL_MEMBER_DISPLAY_COUNT = 4; // Number of members to show initially
+  // 成员数据 (示例数据，实际应从后端获取)
+  const membersData = [
+    { id: 'member1', name: '张三', role: '项目负责人', bio: '张三是项目团队的核心成员，主要负责项目的整体规划与协调。他在乡村发展领域有深厚的理论基础和丰富的实践经验，致力于推动乡村产业的现代化升级。', photo: 'https://via.placeholder.com/120/007bff/FFFFFF?text=张' },
+    { id: 'member2', name: '李四', role: '技术指导', bio: '李四是清华大学XXXX研究院的专家，为工作站提供关键技术支持，特别是在智慧农业和生态农业方面有独到见解。', photo: 'https://via.placeholder.com/120/28a745/FFFFFF?text=李' },
+    { id: 'member3', name: '王五', role: '设计骨干', bio: '王五是设计团队的骨干，擅长乡村景观、建筑改造和文创产品设计，用设计赋能乡村美学和经济发展。', photo: 'https://via.placeholder.com/120/343a40/FFFFFF?text=王' },
+    { id: 'member4', name: '赵六', role: '宣传专员', bio: '赵六负责工作站的对外宣传和新媒体运营，通过多种渠道讲述乡村振兴故事，扩大项目影响力。', photo: 'https://via.placeholder.com/120/6c757d/FFFFFF?text=赵' },
+    { id: 'member5', name: '孙七', role: '调研分析师', bio: '孙七专注于乡村社会经济调研和数据分析，为决策提供科学依据，确保项目的精准性和有效性。', photo: 'https://via.placeholder.com/120/f2f6fc/007bff?text=孙' },
+    { id: 'member6', name: '周八', role: '基层协调员', bio: '周八常驻乡村一线，负责与当地村民和政府部门的沟通协调，是项目顺利实施的桥梁。', photo: 'https://via.placeholder.com/120/007bff/FFFFFF?text=周' },
+    { id: 'member7', name: '吴九', role: '志愿者', bio: '吴九是热心公益的清华学生志愿者，积极参与各项实践活动，为乡村振兴贡献青春力量。', photo: 'https://via.placeholder.com/120/28a745/FFFFFF?text=吴' }
+  ];
 
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mainNav = document.getElementById('main-nav');
+  // 成果数据 (示例数据，实际应从后端获取)
+  const achievementsData = [
+    { id: 'project1', title: '智慧农业示范基地', description: '引入先进农业技术，提升农作物产量与品质，已在某村成功试点并取得显著增产效果。', image: 'https://via.placeholder.com/800x450/007bff/FFFFFF?text=智慧农业项目', phase: '已落地' },
+    { id: 'project2', title: '乡村旅游路线开发', description: '规划并建设多条特色旅游线路，包括古村落探访、农耕体验等，带动当地旅游收入增长30%。', image: 'https://via.placeholder.com/800x450/28a745/FFFFFF?text=乡村旅游项目', phase: '已落地' },
+    { id: 'project3', title: '传统村落活化保护', description: '修缮了多处古建筑，开展非物质文化遗产传承活动，吸引了大量游客和文化爱好者。', image: 'https://via.placeholder.com/800x450/343a40/FFFFFF?text=传统村落活化', phase: '已落地' },
+    { id: 'project4', title: '教育帮扶与人才培养', description: '与当地学校合作开展支教项目，并组织青年创业培训，提升乡村教育和人才素质。', image: 'https://via.placeholder.com/800x450/6c757d/FFFFFF?text=教育帮扶项目', phase: '已落地' },
+    { id: 'project5', title: '生态农业循环经济', description: '推广有机种植和畜禽粪污资源化利用，构建绿色可持续农业系统，减少环境污染。', image: 'https://via.placeholder.com/800x450/f2f6fc/007bff?text=生态农业循环', phase: '已落地' },
+    { id: 'project6', title: '乡村医疗健康服务', description: '引进远程医疗技术和健康讲座，改善基层医疗条件，提高村民健康意识。', image: 'https://via.placeholder.com/800x450/007bff/FFFFFF?text=乡村医疗服务', phase: '已落地' },
 
-  mobileMenu.addEventListener('click', () => {
-    mainNav.classList.toggle('active');
-    mobileMenu.classList.toggle('active');
+    { id: 'design1', title: '村落景观规划设计', description: '为多个村落提供整体景观提升方案，包括公共空间、河流沿岸和村口标识设计。', image: 'https://via.placeholder.com/800x450/28a745/FFFFFF?text=村落景观设计', phase: '已完成' },
+    { id: 'design2', title: '农产品包装设计', description: '为当地特色农产品（如冰糖橙、米酒）设计全新包装，提升产品市场竞争力。', image: 'https://via.placeholder.com/800x450/007bff/FFFFFF?text=农产品包装', phase: '已完成' },
+    { id: 'design3', title: '民宿建筑改造设计', description: '将多栋闲置农房改造为具有地方特色和现代舒适度的精品民宿，促进乡村旅游发展。', image: 'https://via.placeholder.com/800x450/343a40/FFFFFF?text=民宿改造设计', phase: '已完成' },
+    { id: 'design4', title: '乡村公共空间设计', description: '设计了儿童游乐区、文化广场和健身步道等公共空间，丰富村民的休闲生活。', image: 'https://via.placeholder.com/800x450/6c757d/FFFFFF?text=公共空间设计', phase: '已完成' },
+    { id: 'design5', title: '文创产品研发设计', description: '结合当地瑶族文化元素，开发了系列文创商品，如瑶族图腾书签、手工布艺等。', image: 'https://via.placeholder.com/800x450/f2f6fc/007bff?text=文创产品设计', phase: '已完成' },
+    { id: 'design6', title: '乡村导视系统设计', description: '优化了乡村道路标识和旅游导览系统，提高游客在乡村的便捷性和体验感。', image: 'https://via.placeholder.com/800x450/28a745/FFFFFF?text=导视系统设计', phase: '已完成' },
+
+    { id: 'propaganda1', title: '乡村振兴纪录片', description: '制作了三集系列纪录片，真实记录了工作站师生在乡村的实践历程和当地村民的巨大变化。', image: 'https://via.placeholder.com/800x450/343a40/FFFFFF?text=乡村纪录片', phase: '已发布' },
+    { id: 'propaganda2', title: '地方文化宣传册', description: '设计并发行了精美的溆浦文化旅游宣传册，图文并茂地介绍了当地的自然风光和人文历史。', image: 'https://via.placeholder.com/800x450/007bff/FFFFFF?text=文化宣传册', phase: '已发布' },
+    { id: 'propaganda3', title: '新媒体运营策略', description: '协助当地政府搭建并运营微信公众号、抖音等新媒体平台，定期发布乡村振兴动态。', image: 'https://via.placeholder.com/800x450/28a745/FFFFFF?text=新媒体运营', phase: '已发布' },
+    { id: 'propaganda4', title: '乡村故事征集与出版', description: '组织开展“我的乡村故事”征集活动，并将优秀作品结集成册出版，留存乡土记忆。', image: 'https://via.placeholder.com/800x450/6c757d/FFFFFF?text=乡村故事集', phase: '已发布' },
+    { id: 'propaganda5', title: '主题摄影展策划', description: '成功举办了“镜头下的乡村振兴”主题摄影展，用影像展现乡村巨变，吸引社会关注。', image: 'https://via.placeholder.com/800x450/f2f6fc/007bff?text=摄影展', phase: '已发布' },
+    { id: 'propaganda6', title: '社区活动推广方案', description: '为乡村节庆、文化活动等提供了全套推广方案，提升了活动知名度和参与度。', image: 'https://via.placeholder.com/800x450/007bff/FFFFFF?text=活动推广', phase: '已发布' },
+
+    { id: 'report1', title: '乡村产业发展潜力报告', description: '通过实地调研和数据分析，对溆浦县特色农业、乡村旅游等产业的发展潜力进行了全面评估。', image: 'https://via.placeholder.com/800x450/6c757d/FFFFFF?text=产业报告', phase: '已完成' },
+    { id: 'report2', title: '农村人居环境现状调研', description: '对多个村庄的人居环境进行了详细调研，提出了垃圾分类、污水处理等方面的具体改善建议。', image: 'https://via.placeholder.com/800x450/007bff/FFFFFF?text=环境调研', phase: '已完成' },
+    { id: 'report3', title: '乡村振兴青年人才流失调查', description: '深入分析乡村青年人才流失的原因，并提出了一系列吸引和留住人才的政策建议。', image: 'https://via.placeholder.com/800x450/28a745/FFFFFF?text=人才流失调查', phase: '已完成' },
+    { id: 'report4', title: '数字乡村建设可行性报告', description: '探讨了数字技术在乡村治理、智慧农业、电子商务等领域的应用前景和实施路径。', image: 'https://via.placeholder.com/800x450/343a40/FFFFFF?text=数字乡村报告', phase: '已完成' },
+    { id: 'report5', title: '文化旅游资源开发评估', description: '对溆浦县丰富的文化旅游资源进行了系统梳理和价值评估，为旅游开发提供依据。', image: 'https://via.placeholder.com/800x450/f2f6fc/007bff?text=旅游资源评估', phase: '已完成' },
+    { id: 'report6', title: '乡村治理体系现代化研究', description: '针对乡村治理中存在的问题，提出了构建现代化乡村治理体系的策略和机制。', image: 'https://via.placeholder.com/800x450/007bff/FFFFFF?text=乡村治理研究', phase: '已完成' }
+  ];
+
+
+  // 移动菜单切换
+  document.getElementById('mobile-menu').addEventListener('click', function() {
+    const navUl = document.getElementById('main-nav');
+    navUl.classList.toggle('active');
+    this.classList.toggle('active');
   });
 
-  // Smooth scrolling for navigation links
-  document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+  // 导航栏平滑滚动和活动状态
+  document.querySelectorAll('nav ul li a').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
-      // Close any open detail overlays
-      document.getElementById('member-detail-overlay').classList.remove('active');
-      document.getElementById('achievement-detail-overlay').classList.remove('active');
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
 
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
-      // Close mobile menu if open
-      if (mobileMenu.classList.contains('active')) {
-        mainNav.classList.remove('active');
-        mobileMenu.classList.remove('active');
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth'
+        });
+
+        // 移除所有链接的 active 类
+        document.querySelectorAll('nav ul li a').forEach(link => {
+          link.classList.remove('active');
+        });
+        // 为当前点击的链接添加 active 类
+        this.classList.add('active');
+
+        // 如果是移动菜单，点击后收起菜单
+        if (window.innerWidth <= 768) {
+          document.getElementById('main-nav').classList.remove('active');
+          document.getElementById('mobile-menu').classList.remove('active');
+        }
       }
     });
   });
 
-  // --- Hero Section Carousel Logic ---
-  const carouselImages = document.querySelectorAll('.carousel-image');
-  const carouselIndicatorsContainer = document.querySelector('.carousel-indicators');
-  const carouselPrevBtn = document.querySelector('.carousel-prev');
-  const carouselNextBtn = document.querySelector('.carousel-next');
-  let currentImageIndex = 0;
-  let carouselInterval;
+  // 轮播图功能
+  const carouselSlides = document.querySelectorAll('.carousel-slide');
+  const carouselIndicators = document.getElementById('carouselIndicators').querySelectorAll('span');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  let currentSlide = 0;
+  let autoPlayInterval;
 
-  function createIndicators() {
-    carouselImages.forEach((_, index) => {
-      const dot = document.createElement('div');
-      dot.classList.add('indicator-dot');
-      if (index === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => goToImage(index));
-      carouselIndicatorsContainer.appendChild(dot);
+  function showSlide(index) {
+    carouselSlides.forEach((slide, i) => {
+      slide.classList.remove('active');
+      carouselIndicators[i].classList.remove('active');
+      if (i === index) {
+        slide.classList.add('active');
+        carouselIndicators[i].classList.add('active');
+      }
     });
+    currentSlide = index;
   }
 
-  function updateCarousel() {
-    carouselImages.forEach((img, idx) => {
-      img.classList.toggle('active', idx === currentImageIndex);
-    });
-    document.querySelectorAll('.indicator-dot').forEach((dot, idx) => {
-      dot.classList.toggle('active', idx === currentImageIndex);
-    });
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % carouselSlides.length;
+    showSlide(currentSlide);
   }
 
-  function goToImage(index) {
-    currentImageIndex = (index + carouselImages.length) % carouselImages.length;
-    updateCarousel();
-    resetAutoPlay();
-  }
-
-  function nextImage() {
-    goToImage(currentImageIndex + 1);
-  }
-
-  function prevImage() {
-    goToImage(currentImageIndex - 1);
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + carouselSlides.length) % carouselSlides.length;
+    showSlide(currentSlide);
   }
 
   function startAutoPlay() {
-    carouselInterval = setInterval(nextImage, 6000); // Change image every 6 seconds
+    autoPlayInterval = setInterval(nextSlide, 5000); // 每5秒切换
   }
 
   function resetAutoPlay() {
-    clearInterval(carouselInterval);
+    clearInterval(autoPlayInterval);
     startAutoPlay();
   }
 
-  // Initialize carousel
-  if (carouselImages.length > 0) {
-    createIndicators();
-    startAutoPlay();
-    carouselPrevBtn.addEventListener('click', prevImage);
-    carouselNextBtn.addEventListener('click', nextImage);
-  } else {
-    // Hide carousel controls if no images
-    carouselPrevBtn.style.display = 'none';
-    carouselNextBtn.style.display = 'none';
-    carouselIndicatorsContainer.style.display = 'none';
-  }
+  // 初始显示第一个幻灯片并开始自动播放
+  showSlide(0);
+  startAutoPlay();
+
+  nextBtn.addEventListener('click', () => {
+    nextSlide();
+    resetAutoPlay(); // 用户手动切换后重置自动播放计时器
+  });
+
+  prevBtn.addEventListener('click', () => {
+    prevSlide();
+    resetAutoPlay(); // 用户手动切换后重置自动播放计时器
+  });
+
+  carouselIndicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      showSlide(index);
+      resetAutoPlay(); // 用户手动切换后重置自动播放计时器
+    });
+  });
 
 
-  // --- Member Data & Detail Logic ---
-  const membersData = {
-    "member-detail-wang": {
-      name: "王教授",
-      role: "工作站站长 / 乡村发展专家",
-      phase: "第一期实践支队",
-      photo: "https://via.placeholder.com/200/7f8c8d/ffffff?text=王教授头像",
-      bio: "王教授是清华大学乡村振兴领域的资深专家，拥有超过20年的农村发展研究与实践经验。他致力于理论与实践相结合，推动多学科交叉研究，为溆浦工作站的战略规划和项目落地提供了核心指导。王教授尤其关注乡村产业的生态化发展和人才培育，多次深入基层，与村民面对面交流，深受当地群众的信任与爱戴。在担任工作站站长期间，他领导团队成功孵化了多个示范项目，为溆浦地区的经济社会发展注入了新活力。",
-      contact: {
-        email: "wanglaoshi@tsinghua.edu.cn",
-        wechat: "WangJiaoshouWX",
-      }
-    },
-    "member-detail-li": {
-      name: "李老师",
-      role: "指导老师 / 建筑学院",
-      phase: "第一期 & 第二期实践支队",
-      photo: "https://via.placeholder.com/200/bdc3c7/ffffff?text=李老师头像",
-      bio: "李老师是清华大学建筑学院的青年骨干教师，专注于乡村建筑设计与改造、历史村落保护等领域。她以其创新的设计理念和对传统文化的深刻理解，为溆浦村的建筑风貌提升和人居环境改善提供了专业支持。李老师多次带领学生团队驻扎乡村，亲手参与设计和建造，将学术研究转化为实际成果，赢得了广泛赞誉。她积极推动绿色建筑技术在乡村的应用，助力溆浦村走上可持续发展之路。",
-      contact: {
-        email: "lilaoshi@tsinghua.edu.cn",
-      }
-    },
-    "member-detail-zhang": {
-      name: "张明",
-      role: "核心成员 / 研究生",
-      phase: "第二期实践支队",
-      photo: "https://via.placeholder.com/200/95a5a6/ffffff?text=张明头像",
-      bio: "张明是清华大学公共管理学院的优秀研究生，在溆浦工作站主要负责社会调研、数据分析和报告撰写工作。他具备扎实的理论基础和严谨的科研态度，对乡村治理和政策执行有着独到的见解。在溆浦的实践中，张明积极参与村民访谈，收集一手资料，为工作站的决策提供了重要依据。他善于沟通协调，是团队中不可或缺的桥梁。",
-      contact: {
-        email: "zhangming@example.com",
-      }
-    },
-    "member-detail-chen": {
-      name: "陈芳",
-      role: "核心成员 / 本科生",
-      phase: "第一期实践支队",
-      photo: "https://via.placeholder.com/200/c1c1c1/ffffff?text=陈芳头像",
-      bio: "陈芳是清华大学美术学院的本科生，在工作站主要负责宣传材料设计、视觉呈现和文化创意工作。她将艺术设计与乡村振兴相结合，通过海报、文创产品、短视频等多种形式，生动展现溆浦的乡村魅力和发展成果。陈芳富有创意和执行力，她的作品不仅美观大方，更能有效地传播乡村振兴理念，激发村民的参与热情。她在团队中是名副其实的“美学担当”。",
-      contact: {
-        email: "chenfang@example.com",
-      }
-    },
-    "member-detail-zhao": {
-      name: "赵强",
-      role: "志愿者代表",
-      phase: "第二期实践支队",
-      photo: "https://via.placeholder.com/200/888888/ffffff?text=赵强头像",
-      bio: "赵强是清华大学热心公益事业的本科生，作为志愿者代表，他积极参与溆浦工作站的各项活动。他主要负责现场协调、活动组织和村民服务工作。赵强为人热情开朗，乐于助人，与村民建立了深厚的友谊。他在实践中锻炼了组织协调能力和解决问题的能力，对乡村生活有了更深刻的认识。他认为，青年力量是乡村振兴不可或缺的一部分。",
-      contact: {
-        email: "zhaoqiang@example.com",
-      }
-    },
-    "member-detail-liu": {
-      name: "刘华",
-      role: "联络协调员",
-      phase: "第一期实践支队",
-      photo: "https://via.placeholder.com/200/a9a9a9/ffffff?text=刘华头像",
-      bio: "刘华是清华大学建筑学院的博士生，在工作站主要负责对外联络和项目协调。她具有出色的沟通能力和组织能力，有效搭建了工作站与当地政府、企业以及村民之间的沟通桥梁，确保各项工作的顺利推进。刘华对乡村规划和发展模式有深入研究，在团队中发挥了重要的枢纽作用。",
-      contact: {
-        email: "liuhua@example.com",
-      }
-    },
-    "member-detail-sun": {
-      name: "孙悦",
-      role: "财务管理",
-      phase: "第二期实践支队",
-      photo: "https://via.placeholder.com/200/d3d3d3/ffffff?text=孙悦头像",
-      bio: "孙悦是清华大学经济管理学院的硕士生，在工作站主要负责项目资金的预算、支出和审计工作。她细致严谨，确保了工作站各项经费的规范使用和透明管理，为项目的顺利实施提供了坚实的财务保障。孙悦还积极参与了部分项目的经济效益评估工作，为工作站的决策提供了财务数据支持。",
-      contact: {
-        email: "sunyue@example.com",
-      }
-    }
-  };
-
+  // 成员详情弹窗
   const memberDetailOverlay = document.getElementById('member-detail-overlay');
-  const memberDetailCard = document.getElementById('member-detail-card');
-  const backToMembersLink = document.getElementById('back-to-members-link');
+  const memberDetailPhoto = document.getElementById('member-detail-photo');
+  const memberDetailName = document.getElementById('member-detail-name');
+  const memberDetailRole = document.getElementById('member-detail-role');
+  const memberDetailBio = document.getElementById('member-detail-bio');
 
-  // Function to render member details
   function renderMemberDetail(memberId) {
-    const member = membersData[memberId];
-    if (!member) {
-      console.error("Member not found:", memberId);
-      return;
+    const member = membersData.find(m => m.id === memberId);
+    if (member) {
+      memberDetailPhoto.src = member.photo;
+      memberDetailPhoto.alt = member.name;
+      memberDetailName.textContent = member.name;
+      memberDetailRole.textContent = member.role;
+      memberDetailBio.textContent = member.bio;
     }
-
-    memberDetailCard.innerHTML = `
-      <div class="member-detail-photo">
-        <img src="${member.photo}" alt="${member.name}头像">
-      </div>
-      <h3>${member.name}</h3>
-      <p class="detail-role">${member.role}</p>
-      <p class="member-phase-tag">${member.phase}</p>
-      <p class="detail-bio">${member.bio}</p>
-      <div class="contact-info">
-        ${member.contact.email ? `<a href="mailto:${member.contact.email}">邮箱: ${member.contact.email}</a>` : ''}
-        ${member.contact.wechat ? `<span>微信: ${member.contact.wechat}</span>` : ''}
-        ${member.contact.phone ? `<span>电话: ${member.contact.phone}</span>` : ''}
-        ${member.contact.linkedin ? `<a href="https://linkedin.com/in/${member.contact.linkedin}" target="_blank">LinkedIn</a>` : ''}
-        ${member.contact.weibo ? `<a href="https://weibo.com/${member.contact.weibo}" target="_blank">微博</a>` : ''}
-        ${member.contact.portfolio ? `<a href="${member.contact.portfolio}" target="_blank">个人主页</a>` : ''}
-      </div>
-    `;
   }
 
-  // Handle member card clicks
   document.querySelectorAll('.member-card').forEach(card => {
-    card.addEventListener('click', function (e) {
-      e.preventDefault();
-      const memberId = this.getAttribute('href').substring(1); // Get ID from href
+    card.addEventListener('click', function() {
+      const memberId = this.dataset.id;
       renderMemberDetail(memberId);
       memberDetailOverlay.classList.add('active');
-      history.pushState(null, '', `#${memberId}`); // Update URL hash
+      window.location.hash = `member-detail-${memberId}`; // 更新URL哈希
     });
   });
 
-  // Handle closing member detail overlay
-  backToMembersLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    memberDetailOverlay.classList.remove('active');
-    history.pushState(null, '', '#members'); // Restore #members hash
-  });
-
-  memberDetailOverlay.addEventListener('click', function(e) {
-    if (e.target === memberDetailOverlay) { // Only close if clicking outside the content
-      memberDetailOverlay.classList.remove('active');
-      history.pushState(null, '', '#members'); // Restore #members hash
-    }
-  });
-
-  // --- Achievement Data & Detail Logic ---
-  const achievementsData = {
-    "achievement-detail-project-1": {
-      title: "溆浦村文化广场改造项目",
-      date: "2024年05月10日",
-      phase: "第一期",
-      description: "本期项目聚焦溆浦村核心区域的公共空间提升，对老旧文化广场进行全面规划设计与施工监督。通过引入本地文化元素，优化绿化景观，增设便民设施（如休息座椅、健身器材），有效提升了村民的休闲娱乐品质，成为乡村社区的新亮点。项目过程中，我们积极听取村民意见，确保设计符合实际需求，并组织了多次现场协调会，保障施工质量和进度。该项目的成功落地，显著改善了村容村貌，增强了村民的幸福感和凝聚力。",
-      tags: ["乡村建设", "文化提升", "民生工程"],
-      image: "https://via.placeholder.com/700x350/9b59b6/ffffff?text=Culture+Square+Full+Detail",
-      video: "" // Can add video URL here
-    },
-    "achievement-detail-project-2": {
-      title: "农产品品牌孵化与电商平台搭建",
-      date: "2024年03月22日",
-      phase: "第二期",
-      description: "针对溆浦村特色农产品缺乏市场竞争力和销售渠道的问题，工作站开展了为期半年的品牌孵化与电商平台搭建项目。我们协助农户对当地优质农产品（如溆浦蜜橘、土蜂蜜）进行标准化包装设计，注册了“溆浦优选”品牌。同时，通过电商培训、直播带货指导等方式，帮助农户在主流电商平台开设店铺，拓展线上销售渠道。目前，“溆浦优选”已初见成效，有效提升了农产品的附加值和村民收入。",
-      tags: ["产业发展", "扶贫项目", "电商助农", "品牌建设"],
-      image: "https://via.placeholder.com/700x350/3498db/ffffff?text=E-commerce+Platform+Detail",
-      video: ""
-    },
-    "achievement-detail-project-3": {
-      title: "乡村民宿示范点改造工程",
-      date: "2023年11月18日",
-      phase: "第一期",
-      description: "为探索乡村旅游新模式，工作站选择溆浦村一处闲置民居进行现代化改造，打造成为具有当地特色、符合现代游客需求的乡村民宿样板。设计团队保留了传统建筑的韵味，同时融入了环保材料和智能家居系统，提升了居住舒适度。改造完成后，该民宿作为示范点，吸引了周边地区游客，并为其他村民提供了民宿改造的借鉴经验，带动了乡村旅游产业的初步发展。",
-      tags: ["旅游开发", "增收", "乡村建设", "样板示范"],
-      image: "https://via.placeholder.com/700x350/2ecc71/ffffff?text=Homestay+Project+Detail",
-      video: ""
-    },
-    "achievement-detail-project-4": {
-      title: "溆浦村饮水安全提升工程",
-      date: "2023年09月05日",
-      phase: "第二期",
-      description: "鉴于溆浦村部分区域存在供水设施老旧、水质不稳定的问题，工作站组织实施了饮水安全提升工程。项目包括对老旧管网的更换、新建小型净水设施以及水源地的保护与监测。通过与当地水务部门合作，确保了工程的科学性和可持续性。该工程的完成，从根本上改善了村民的饮水质量，保障了村民的身体健康，是重要的民生保障项目。",
-      tags: ["民生改善", "基础设施", "水利", "乡村建设"],
-      image: "https://via.placeholder.com/700x350/e74c3c/ffffff?text=Water+Safety+Detail",
-      video: ""
-    },
-    "achievement-detail-project-5": {
-      title: "青少年乡村研学基地建设",
-      date: "2023年07月10日",
-      phase: "第一期",
-      description: "充分利用溆浦村独特的自然风光和乡土文化资源，工作站规划并协助建设了一处青少年乡村研学基地。基地设计注重教育性、互动性和安全性，包含了农耕体验区、自然课堂、传统手工坊等多个功能区。此项目的建成，不仅为青少年提供了亲近自然、了解乡村的实践平台，也为溆浦村带来了新的客源，促进了文旅产业的融合发展。",
-      tags: ["教育帮扶", "文旅融合", "青少年", "社会实践"],
-      image: "https://via.placeholder.com/700x350/f39c12/ffffff?text=Youth+Study+Base+Detail",
-      video: ""
-    },
-    "achievement-detail-design-1": {
-      title: "溆浦村全域旅游景观规划",
-      date: "2024年01月15日",
-      phase: "第二期",
-      description: "为推动溆浦村旅游业的全面发展，工作站编制了《溆浦村全域旅游景观规划》。该规划从宏观层面梳理了村庄的生态本底和文化资源，提出了“一核两带多节点”的旅游空间布局。详细设计了主要景点提升方案、生态游线规划、旅游标识系统以及配套服务设施布局等，旨在构建系统化、品牌化的乡村旅游目的地。规划方案获得了当地政府的高度认可，并逐步进入实施阶段。",
-      tags: ["旅游规划", "生态设计", "乡村旅游", "景观设计"],
-      image: "https://via.placeholder.com/700x350/e67e22/ffffff?text=Tourism+Plan+Detail",
-      video: ""
-    },
-    "achievement-detail-design-2": {
-      title: "乡土建筑改造设计导则",
-      date: "2023年09月01日",
-      phase: "第一期",
-      description: "针对溆浦地区乡土建筑保护与更新的实际需求，工作站专家团队深入调研，编制了《溆浦地区乡土建筑改造设计导则》。该导则明确了传统建筑的保护原则、修缮技术要点、新建筑的风格要求和材料选用建议，旨在指导村民在房屋改造过程中，既满足现代生活需求，又能保留乡土特色和文化基因，避免千篇一律的现代化改造。导则已在当地广泛推广，成为村民改造房屋的重要参考。",
-      tags: ["建筑设计", "文化传承", "乡村规划", "保护与更新"],
-      image: "https://via.placeholder.com/700x350/f1c40f/ffffff?text=Architecture+Guide+Detail",
-      video: ""
-    },
-    "achievement-detail-design-3": {
-      title: "溆浦村公共空间艺术介入方案",
-      date: "2024年03月01日",
-      phase: "第二期",
-      description: "为提升溆浦村的艺术氛围和公共空间品质，设计团队提出了公共空间艺术介入方案。该方案结合溆浦的自然风光和农耕文化，设计了一系列具有地方特色的雕塑、壁画和装置艺术。这些艺术作品不仅美化了村庄环境，也成为了村民和游客拍照打卡的亮点，增强了乡村的吸引力和文化软实力。艺术介入项目还鼓励村民参与创作，促进了社区共建。",
-      tags: ["公共艺术", "空间活化", "美学提升", "社区共建"],
-      image: "https://via.placeholder.com/700x350/34495e/ffffff?text=Art+Intervention+Detail",
-      video: ""
-    },
-    "achievement-detail-promotion-1": {
-      title: "《溆浦乡村振兴纪实》系列短视频发布",
-      date: "2023年07月20日",
-      phase: "第一期",
-      description: "为全面展现清华大学溆浦乡村振兴工作站的实践成果和溆浦村庄的变化，团队制作并发布了《溆浦乡村振兴纪实》系列短视频。视频以生动的镜头语言，记录了项目从调研到落地的全过程，以及村民生活的改善。系列视频在各大社交媒体平台发布后，获得了大量关注和点赞，有效提升了工作站的社会影响力，并激发了更多人关注乡村振兴。",
-      tags: ["媒体传播", "品牌建设", "影像记录", "社会影响力"],
-      image: "https://via.placeholder.com/700x350/c0392b/ffffff?text=Video+Series+Detail",
-      video: "https://www.youtube.com/embed/dQw4w9WgXcQ" // Example video URL
-    },
-    "achievement-detail-promotion-2": {
-      title: "“清华与溆浦”主题展览在校内展出",
-      date: "2023年05月12日",
-      phase: "第一期",
-      description: "为向校内外师生及社会各界展示溆浦工作站的实践成果，我们精心策划了“清华与溆浦”主题展览。展览通过图片、文字、模型、视频等多种形式，系统介绍了溆浦的历史文化、工作站的介入模式、具体项目成果以及村民受益情况。展览期间，吸引了大量参观者，增进了公众对乡村振兴的理解和支持，也为清华学子提供了了解国情、服务社会的机会。",
-      tags: ["校际交流", "社会影响", "展览展示", "公众教育"],
-      image: "https://via.placeholder.com/700x350/8e44ad/ffffff?text=Exhibition+Detail",
-      video: ""
-    },
-    "achievement-detail-promotion-3": {
-      title: "溆浦乡村振兴主题宣传册制作与发行",
-      date: "2024年04月10日",
-      phase: "第二期",
-      description: "为了更系统、更直观地对外推广溆浦乡村振兴的经验和模式，工作站设计并制作了精美的宣传册。宣传册内容涵盖工作站简介、核心理念、代表项目案例、社会效益以及未来展望。通过图文并茂的形式，生动讲述了溆浦的故事。宣传册已在各类对外交流活动中广泛发行，成为展示溆浦形象、吸引外部资源的重要媒介。",
-      tags: ["形象塑造", "旅游推广", "印刷品", "对外宣传"],
-      image: "https://via.placeholder.com/700x350/16a085/ffffff?text=Brochure+Detail",
-      video: ""
-    },
-    "achievement-detail-report-1": {
-      title: "溆浦村社会经济发展现状调研报告",
-      date: "2024年04月01日",
-      phase: "第一期",
-      description: "本报告是对溆浦村社会经济发展现状进行的全面深入调研成果。报告详细分析了溆浦村的人口结构、劳动力分布、主要产业构成、村民收入来源与水平、土地利用情况以及教育、医疗、交通等公共服务设施现状。通过实地走访、问卷调查、数据统计等多种方法，客观呈现了溆浦村发展的基础条件与面临的挑战，为后续制定精准帮扶策略提供了科学依据。",
-      tags: ["数据分析", "发展评估", "社会调研", "经济分析"],
-      image: "https://via.placeholder.com/700x350/1abc9c/ffffff?text=Economic+Report+Detail",
-      video: ""
-    },
-    "achievement-detail-report-2": {
-      title: "溆浦地区特色农产品市场潜力分析报告",
-      date: "2023年10月25日",
-      phase: "第二期",
-      description: "为助力溆浦地区农产品实现市场化、品牌化发展，本报告对当地特色农产品（如脐橙、茶叶、竹笋等）进行了深入的市场潜力分析。报告内容包括：目标市场研究、消费者需求分析、竞争对手状况、产品优势与劣势评估以及销售渠道拓展策略。基于详实的数据和案例分析，报告提出了针对性的品牌建设、营销推广和产业链延伸建议，为当地农业产业升级提供了重要参考。",
-      tags: ["市场研究", "农业发展", "产业升级", "商业分析"],
-      image: "https://via.placeholder.com/700x350/34495e/ffffff?text=Agriculture+Report+Detail",
-      video: ""
-    }
-  };
-
+  // 成果详情弹窗
   const achievementDetailOverlay = document.getElementById('achievement-detail-overlay');
-  const achievementDetailCard = document.getElementById('achievement-detail-card');
-  const backToAchievementsLink = document.getElementById('back-to-achievements-link');
+  const achievementDetailImage = document.getElementById('achievement-detail-image');
+  const achievementDetailPhase = document.getElementById('achievement-detail-phase');
+  const achievementDetailTitle = document.getElementById('achievement-detail-title');
+  const achievementDetailDescription = document.getElementById('achievement-detail-description');
 
-  // Function to render achievement details
   function renderAchievementDetail(achievementId) {
-    const achievement = achievementsData[achievementId];
-    if (!achievement) {
-      console.error("Achievement not found:", achievementId);
-      return;
+    const achievement = achievementsData.find(a => a.id === achievementId);
+    if (achievement) {
+      achievementDetailImage.src = achievement.image;
+      achievementDetailImage.alt = achievement.title;
+      achievementDetailPhase.textContent = achievement.phase;
+      achievementDetailTitle.textContent = achievement.title;
+      achievementDetailDescription.textContent = achievement.description;
     }
-
-    // Map tag content to specific classes for coloring if needed
-    const tagClassMap = {
-      "乡村建设": "tag-rural-construction",
-      "文化提升": "tag-culture",
-      "产业发展": "tag-industry",
-      "扶贫项目": "tag-poverty",
-      "旅游开发": "tag-industry",
-      "增收": "tag-poverty",
-      "民生改善": "tag-poverty",
-      "基础设施": "tag-rural-construction",
-      "教育帮扶": "tag-education",
-      "文旅融合": "tag-culture",
-      "旅游规划": "tag-industry",
-      "生态设计": "tag-culture",
-      "建筑设计": "tag-industry",
-      "文化传承": "tag-culture",
-      "公共艺术": "tag-culture",
-      "媒体传播": "tag-culture",
-      "品牌建设": "tag-industry",
-      "校际交流": "tag-education",
-      "社会影响": "tag-education",
-      "形象塑造": "tag-culture",
-      "数据分析": "tag-research", /* Example new tag class */
-      "发展评估": "tag-research",
-      "市场研究": "tag-research",
-      "农业发展": "tag-industry",
-      // Add more as necessary
-    };
-
-    let tagsHtml = achievement.tags.map(tag => {
-      const className = tagClassMap[tag] || ''; // Get specific class or empty string
-      return `<span class="project-tag ${className}">${tag}</span>`;
-    }).join('');
-
-
-    let mediaContent = '';
-    if (achievement.image) {
-      mediaContent += `<div class="detail-image-placeholder"><img src="${achievement.image}" alt="${achievement.title}图片"></div>`;
-    }
-    if (achievement.video) {
-      // Basic embed for YouTube, can be expanded for other platforms
-      // Use iframe for embedded video
-      mediaContent += `<div class="detail-image-placeholder" style="height: 350px;"><iframe src="${achievement.video}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
-    }
-
-
-    achievementDetailCard.innerHTML = `
-      <h3>${achievement.title}</h3>
-      <p class="detail-date-phase">
-        发布日期：${achievement.date}
-        ${achievement.phase ? ` / <span class="project-phase">${achievement.phase}</span>` : ''}
-      </p>
-      ${mediaContent}
-      <p class="detail-description">${achievement.description}</p>
-      <div class="detail-tags">${tagsHtml}</div>
-    `;
   }
 
-  // Handle achievement item clicks
-  document.querySelectorAll('.achievement-item').forEach(item => {
-    item.addEventListener('click', function (e) {
-      e.preventDefault();
-      const achievementId = this.getAttribute('href').substring(1); // Get ID from href
+  document.querySelectorAll('.achievement-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const achievementId = this.dataset.id;
       renderAchievementDetail(achievementId);
       achievementDetailOverlay.classList.add('active');
-      history.pushState(null, '', `#${achievementId}`); // Update URL hash
+      window.location.hash = `achievement-detail-${achievementId}`; // 更新URL哈希
     });
   });
 
-  // Handle closing achievement detail overlay
-  backToAchievementsLink.addEventListener('click', function(e) {
-    e.preventDefault();
-    achievementDetailOverlay.classList.remove('active');
-    history.pushState(null, '', '#achievements'); // Restore #achievements hash
+  // 关闭弹窗
+  document.querySelectorAll('.close-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      memberDetailOverlay.classList.remove('active');
+      achievementDetailOverlay.classList.remove('active');
+      // 清除哈希，避免再次加载时自动打开
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    });
+  });
+
+  // 点击弹窗外部关闭
+  memberDetailOverlay.addEventListener('click', function(e) {
+    if (e.target === memberDetailOverlay) {
+      memberDetailOverlay.classList.remove('active');
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
   });
 
   achievementDetailOverlay.addEventListener('click', function(e) {
-    if (e.target === achievementDetailOverlay) { // Only close if clicking outside the content
+    if (e.target === achievementDetailOverlay) {
       achievementDetailOverlay.classList.remove('active');
-      history.pushState(null, '', '#achievements'); // Restore #achievements hash
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
     }
   });
 
-
-  // --- Expand/Collapse Logic for Achievement Categories ---
-  document.querySelectorAll('.achievement-category').forEach(category => {
-    const grid = category.querySelector('.achievement-grid');
-    const items = Array.from(grid.querySelectorAll('.achievement-item'));
+  // --- 通用折叠/展开功能 ---
+  document.querySelectorAll('.category-section').forEach(category => {
     const expandBtn = category.querySelector('.expand-btn');
+    const contentGrid = category.querySelector('.member-grid, .achievement-grid'); // 同时查找成员或成果网格
 
-    if (!expandBtn) return; // Exit if no button found (shouldn't happen with current HTML)
-
-    // Initially hide items beyond the limit and set button text
-    if (items.length > INITIAL_ACHIEVEMENT_DISPLAY_COUNT) {
-      grid.classList.add('collapsed'); // Apply collapsed class
-      expandBtn.textContent = '查看更多';
-    } else {
-      expandBtn.style.display = 'none'; // Hide button if no need to collapse
-    }
-
-    expandBtn.addEventListener('click', () => {
-      if (grid.classList.contains('collapsed')) {
-        grid.classList.remove('collapsed');
-        expandBtn.textContent = '收起';
+    if (expandBtn && contentGrid) {
+      // 初始状态检查
+      let itemsToShow;
+      if (category.id === 'members') {
+        itemsToShow = 4; // 成员默认显示4个
       } else {
-        grid.classList.add('collapsed');
-        expandBtn.textContent = '查看更多';
-        // Optional: Scroll back to the top of the category when collapsed
-        category.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        itemsToShow = 3; // 成果默认显示3个
       }
-    });
-  });
 
+      const allItems = contentGrid.querySelectorAll('.member-card, .achievement-card');
+      if (allItems.length > itemsToShow) { // 只有当项目数量超过默认显示数量时才折叠
+        contentGrid.classList.add('collapsed');
+        expandBtn.textContent = `查看更多${category.id === 'members' ? '成员' : '成果'}`;
+      } else { // 否则隐藏按钮
+        expandBtn.style.display = 'none';
+      }
 
-  // --- Expand/Collapse Logic for Members Directory ---
-  const memberGrid = document.querySelector('.members-section .member-grid');
-  const memberCards = Array.from(memberGrid.querySelectorAll('.member-card'));
-  const toggleMembersBtn = document.getElementById('toggle-members-btn');
-
-  if (memberCards.length > INITIAL_MEMBER_DISPLAY_COUNT) {
-    memberGrid.classList.add('collapsed'); // Apply collapsed class
-    toggleMembersBtn.textContent = '查看更多成员';
-    toggleMembersBtn.style.display = 'block'; // Ensure button is visible
-  } else {
-    toggleMembersBtn.style.display = 'none'; // Hide button if no need to collapse
-  }
-
-  toggleMembersBtn.addEventListener('click', () => {
-    if (memberGrid.classList.contains('collapsed')) {
-      memberGrid.classList.remove('collapsed');
-      toggleMembersBtn.textContent = '收起成员列表';
-    } else {
-      memberGrid.classList.add('collapsed');
-      toggleMembersBtn.textContent = '查看更多成员';
-      // Scroll back to the top of the members section when collapsed
-      document.getElementById('members').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      expandBtn.addEventListener('click', function() {
+        contentGrid.classList.toggle('collapsed');
+        if (contentGrid.classList.contains('collapsed')) {
+          this.textContent = `查看更多${category.id === 'members' ? '成员' : '成果'}`;
+          // (可选) 折叠时滚动回顶部
+          category.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          this.textContent = '收起';
+        }
+      });
     }
   });
 
 
-  // --- Initial Hash Handling on Page Load ---
+  // --- 页面加载时的哈希处理 ---
   window.addEventListener('hashchange', function() {
     const hash = window.location.hash;
     if (hash.startsWith('#member-detail-')) {
-      document.getElementById('achievement-detail-overlay').classList.remove('active'); // Close other overlay
+      document.getElementById('achievement-detail-overlay').classList.remove('active'); // 关闭其他弹窗
       renderMemberDetail(hash.substring(1));
       memberDetailOverlay.classList.add('active');
     } else if (hash.startsWith('#achievement-detail-')) {
-      document.getElementById('member-detail-overlay').classList.remove('active'); // Close other overlay
+      document.getElementById('member-detail-overlay').classList.remove('active'); // 关闭其他弹窗
       renderAchievementDetail(hash.substring(1));
       achievementDetailOverlay.classList.add('active');
-    } else if (hash === '#members' || hash === '#achievements' || hash === '') {
+    } else if (hash === '#members' || hash === '#achievements' || hash === '' || hash === '#contact-us' || hash === '#home' || hash === '#about-us') {
       memberDetailOverlay.classList.remove('active');
       achievementDetailOverlay.classList.remove('active');
     }
   });
 
-  // Initial check on page load to open any deep-linked details
+  // 页面初次加载时检查哈希，看是否需要打开详情弹窗
   if (window.location.hash.startsWith('#member-detail-')) {
     renderMemberDetail(window.location.hash.substring(1));
     memberDetailOverlay.classList.add('active');
