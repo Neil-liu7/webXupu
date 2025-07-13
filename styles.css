@@ -266,7 +266,7 @@ nav ul li a:hover {
     align-items: center;
     font-size: 1.2em;
     color: #7f8c8d;
-    overflow: hidden; /* Ensure image fits */
+    overflow: hidden; /* Ensure images fits */
 }
 .achievement-thumbnail img {
     width: 100%;
