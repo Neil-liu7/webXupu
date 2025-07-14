@@ -6,12 +6,12 @@
     <title>清华大学乡村振兴工作站 - 溆浦项目成果</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS 样式部分 */
+        /* CSS 样式部分 - 配色调整 */
         :root {
-            --color-primary-blue: #004d9c; /* 专业蓝色 */
-            --color-secondary-green: #4caf50; /* 活力绿色 */
-            --color-accent-purple: #8A2BE2; /* 清华紫 (作为点缀) */
-            --color-light-gray: #f9f9f9;
+            --color-primary-blue: #2c3e50; /* 更稳重的深蓝色 */
+            --color-secondary-green: #8fbc8f; /* 更柔和的浅绿色 (或 #a7c957 橄榄绿) */
+            --color-accent-purple: #9b59b6; /* 稍低饱和度的紫色 */
+            --color-light-gray: #f4f5f7; /* 更淡的灰白色背景 */
             --color-text-dark: #333;
             --color-text-light: #fff;
             --color-background-white: #fff;
@@ -33,7 +33,7 @@
 
         /* ------------------- 头部导航与英雄区 ------------------- */
         .header-hero {
-            background: linear-gradient(135deg, var(--color-primary-blue), #003366);
+            background: linear-gradient(135deg, var(--color-primary-blue), #34495e); /* 调整渐变色 */
             color: var(--color-text-light);
             text-align: center;
             padding: 100px 20px 60px;
@@ -47,7 +47,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.3); /* 略微调整透明度 */
             z-index: 1;
         }
 
@@ -77,7 +77,7 @@
             background-color: var(--color-light-gray);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* 调整阴影 */
             margin-top: 40px;
             position: relative;
         }
@@ -86,7 +86,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.8);
+            filter: brightness(0.9); /* 略微调整亮度 */
         }
 
         /* ------------------- 主要内容区域 ------------------- */
@@ -98,7 +98,7 @@
 
         .section {
             padding: 80px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #e0e0e0; /* 更淡的分割线 */
         }
 
         .section-title {
@@ -117,7 +117,7 @@
             display: block;
             width: 80px;
             height: 4px;
-            background: var(--color-secondary-green);
+            background: var(--color-secondary-green); /* 调整强调色 */
             margin: 15px auto 0;
             border-radius: 2px;
         }
@@ -131,7 +131,7 @@
         .project-card {
             background: var(--color-background-white);
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* 调整阴影 */
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
@@ -139,8 +139,8 @@
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px); /* 减弱悬停效果 */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* 调整悬停阴影 */
         }
 
         .card-image {
@@ -155,10 +155,11 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
+            filter: brightness(0.95); /* 略微调整图片亮度 */
         }
 
         .card-image img:hover {
-            transform: scale(1.05);
+            transform: scale(1.02); /* 减弱缩放效果 */
         }
 
         .card-content {
@@ -168,17 +169,52 @@
 
         .card-title {
             font-size: 1.4rem;
+            margin-top: 10px; /* 调整标题与新标签的间距 */
             margin-bottom: 15px;
             color: var(--color-primary-blue);
         }
 
         .card-text {
-            color: #666;
+            color: #555; /* 更柔和的文本颜色 */
             font-size: 1rem;
             text-align: justify;
         }
 
-        /* ------------------- 总结部分 ------------------- */
+        /* ------------------- 新增标签样式 - 配色调整 ------------------- */
+        .card-labels {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .project-label {
+            font-size: 0.75rem; /* 略微缩小字体 */
+            font-weight: 500; /* 调整字重 */
+            padding: 4px 8px; /* 调整内边距 */
+            border-radius: 5px;
+            color: var(--color-text-light);
+            text-transform: uppercase;
+        }
+
+        /* 标签颜色区分 - 配色调整 */
+        .label-industry {
+            background-color: #a7c957; /* 柔和的橄榄绿 */
+        }
+
+        .label-infrastructure {
+            background-color: var(--color-primary-blue);
+        }
+
+        .label-culture {
+            background-color: var(--color-accent-purple);
+        }
+
+        .label-phase {
+            background-color: #999; /* 更浅的中性色 */
+            color: var(--color-text-light);
+        }
+
+        /* ------------------- 总结部分 - 配色调整 ------------------- */
         .summary-section {
             background-color: var(--color-light-gray);
             padding: 80px 20px;
@@ -187,7 +223,7 @@
 
         .summary-title {
             font-size: 2.2rem;
-            color: var(--color-accent-purple);
+            color: var(--color-primary-blue); /* 与主标题颜色一致 */
             margin-bottom: 30px;
         }
 
@@ -196,7 +232,7 @@
             margin: 0 auto 50px;
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #555;
+            color: #666; /* 略微调整文本颜色 */
         }
 
         .contact-info {
@@ -208,7 +244,7 @@
             margin: 10px 0;
         }
 
-        /* ------------------- Lightbox 模态框 ------------------- */
+        /* ------------------- Lightbox 模态框 - 配色调整 ------------------- */
         .lightbox-modal {
             display: none;
             position: fixed;
@@ -219,15 +255,15 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.85); /* 略微调整背景透明度 */
         }
 
         .modal-content {
             margin: auto;
             display: block;
-            width: 80%;
-            max-width: 800px;
-            max-height: 80%;
+            width: 90%; /* 略微放大模态框图片 */
+            max-width: 1000px;
+            max-height: 90%; /* 允许更高的高度 */
             object-fit: contain;
         }
 
@@ -235,7 +271,7 @@
             position: absolute;
             top: 15px;
             right: 35px;
-            color: #f1f1f1;
+            color: #eee; /* 调整关闭按钮颜色 */
             font-size: 40px;
             font-weight: bold;
             transition: 0.3s;
@@ -244,7 +280,7 @@
 
         .close-btn:hover,
         .close-btn:focus {
-            color: #bbb;
+            color: #ccc;
             text-decoration: none;
         }
     </style>
@@ -259,22 +295,26 @@
             清华大学团队扎根怀化溆浦，致力于通过教育、科技、文化和产业等多方面助力乡村振兴。本次展示汇集了工作站的核心成果，体现了学术力量与地方实践的深度融合。
         </p>
         <div class="hero-image-placeholder">
-            <img src="https://via.placeholder.com/1200x600/004d9c/ffffff?text=Xupu+Project+Overview+Image" alt="溆浦项目整体风貌图">
+            <img src="https://via.placeholder.com/1200x600/2c3e50/ffffff?text=Xupu+Project+Overview+Image" alt="溆浦项目整体风貌图">
         </div>
     </div>
 </header>
 
 <main class="main-content">
 
-    <section id="industry" class="section">
-        <h2 class="section-title">产业发展</h2>
+    <section id="project-list" class="section">
+        <h2 class="section-title">项目成果一览</h2>
         <div class="content-grid">
 
             <div class="project-card">
-                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/4caf50/ffffff?text=Industrial+Development+-+Example+1')">
-                    <img src="https://via.placeholder.com/400x250/4caf50/ffffff?text=Example+1" alt="产业发展图片">
+                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/a7c957/ffffff?text=Industrial+Development+-+Example+1')">
+                    <img src="https://via.placeholder.com/400x250/a7c957/ffffff?text=Example+1" alt="产业发展图片">
                 </div>
                 <div class="card-content">
+                    <div class="card-labels">
+                        <span class="project-label label-industry">产业发展</span>
+                        <span class="project-label label-phase">第一期</span>
+                    </div>
                     <h3 class="card-title">农业品牌化与电商赋能</h3>
                     <p class="card-text">
                         工作站协助当地梳理特色农产品，建立区域品牌，并通过直播带货、电商平台搭建等方式，拓宽销售渠道，显著提升了农户收入。
@@ -283,10 +323,14 @@
             </div>
 
             <div class="project-card">
-                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/4caf50/ffffff?text=Industrial+Development+-+Example+2')">
-                    <img src="https://via.placeholder.com/400x250/4caf50/ffffff?text=Example+2" alt="产业发展图片">
+                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/a7c957/ffffff?text=Industrial+Development+-+Example+2')">
+                    <img src="https://via.placeholder.com/400x250/a7c957/ffffff?text=Example+2" alt="产业发展图片">
                 </div>
                 <div class="card-content">
+                    <div class="card-labels">
+                        <span class="project-label label-industry">产业发展</span>
+                        <span class="project-label label-phase">第一期</span>
+                    </div>
                     <h3 class="card-title">旅游产业规划与实践</h3>
                     <p class="card-text">
                         依托溆浦丰富的自然与人文资源，设计了乡村旅游线路，指导村民进行民宿改造和运营，促进了生态旅游的可持续发展。
@@ -295,10 +339,14 @@
             </div>
 
             <div class="project-card">
-                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/4caf50/ffffff?text=Industrial+Development+-+Example+3')">
-                    <img src="https://via.placeholder.com/400x250/4caf50/ffffff?text=Example+3" alt="产业发展图片">
+                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/a7c957/ffffff?text=Industrial+Development+-+Example+3')">
+                    <img src="https://via.placeholder.com/400x250/a7c957/ffffff?text=Example+3" alt="产业发展图片">
                 </div>
                 <div class="card-content">
+                    <div class="card-labels">
+                        <span class="project-label label-industry">产业发展</span>
+                        <span class="project-label label-phase">第二期</span>
+                    </div>
                     <h3 class="card-title">技术培训与就业技能提升</h3>
                     <p class="card-text">
                         开展针对性的职业技能培训，包括农技、电商运营、手工艺等，帮助村民掌握新技能，为当地经济发展注入内生动力。
@@ -306,18 +354,15 @@
                 </div>
             </div>
 
-        </div>
-    </section>
-
-    <section id="infrastructure" class="section">
-        <h2 class="section-title">基础设施改善</h2>
-        <div class="content-grid">
-
             <div class="project-card">
-                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/004d9c/ffffff?text=Infrastructure+Improvement+-+Example+1')">
-                    <img src="https://via.placeholder.com/400x250/004d9c/ffffff?text=Example+4" alt="基础设施改善图片">
+                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/2c3e50/ffffff?text=Infrastructure+Improvement+-+Example+1')">
+                    <img src="https://via.placeholder.com/400x250/2c3e50/ffffff?text=Example+4" alt="基础设施改善图片">
                 </div>
                 <div class="card-content">
+                    <div class="card-labels">
+                        <span class="project-label label-infrastructure">基础设施改善</span>
+                        <span class="project-label label-phase">第一期</span>
+                    </div>
                     <h3 class="card-title">人居环境综合提升</h3>
                     <p class="card-text">
                         规划并实施了村庄道路硬化、卫生设施改造、环境绿化美化等项目，显著改善了当地居民的生活质量和村容村貌。
@@ -326,10 +371,14 @@
             </div>
 
             <div class="project-card">
-                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/004d9c/ffffff?text=Infrastructure+Improvement+-+Example+2')">
-                    <img src="https://via.placeholder.com/400x250/004d9c/ffffff?text=Example+5" alt="基础设施改善图片">
+                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/2c3e50/ffffff?text=Infrastructure+Improvement+-+Example+2')">
+                    <img src="https://via.placeholder.com/400x250/2c3e50/ffffff?text=Example+5" alt="基础设施改善图片">
                 </div>
                 <div class="card-content">
+                    <div class="card-labels">
+                        <span class="project-label label-infrastructure">基础设施改善</span>
+                        <span class="project-label label-phase">第二期</span>
+                    </div>
                     <h3 class="card-title">教育设施与资源优化</h3>
                     <p class="card-text">
                         捐赠教学设备，改善校舍条件，并组织清华学生志愿支教活动，为当地师生提供了更优质的教育资源和学习环境。
@@ -338,28 +387,30 @@
             </div>
 
             <div class="project-card">
-                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/004d9c/ffffff?text=Infrastructure+Improvement+-+Example+3')">
-                    <img src="https://via.placeholder.com/400x250/004d9c/ffffff?text=Example+6" alt="基础设施改善图片">
+                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/2c3e50/ffffff?text=Infrastructure+Improvement+-+Example+3')">
+                    <img src="https://via.placeholder.com/400x250/2c3e50/ffffff?text=Example+6" alt="基础设施改善图片">
                 </div>
                 <div class="card-content">
+                    <div class="card-labels">
+                        <span class="project-label label-infrastructure">基础设施改善</span>
+                        <span class="project-label label-phase">第三期</span>
+                    </div>
                     <h3 class="card-title">智慧乡村基础设施建设</h3>
                     <p class="card-text">
                         引入现代信息技术，推动了村级网络覆盖，建立了智慧农业管理系统，提升了乡村管理的效率和智能化水平。
                     </p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="culture" class="section">
-        <h2 class="section-title">文化传承与发展</h2>
-        <div class="content-grid">
 
             <div class="project-card">
-                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/8A2BE2/ffffff?text=Cultural+Inheritance+-+Example+1')">
-                    <img src="https://via.placeholder.com/400x250/8A2BE2/ffffff?text=Example+7" alt="文化传承图片">
+                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/9b59b6/ffffff?text=Cultural+Inheritance+-+Example+1')">
+                    <img src="https://via.placeholder.com/400x250/9b59b6/ffffff?text=Example+7" alt="文化传承图片">
                 </div>
                 <div class="card-content">
+                    <div class="card-labels">
+                        <span class="project-label label-culture">文化传承与发展</span>
+                        <span class="project-label label-phase">第一期</span>
+                    </div>
                     <h3 class="card-title">非遗保护与活化利用</h3>
                     <p class="card-text">
                         深入挖掘溆浦当地的非物质文化遗产资源，开展研究和保护工作，并探索非遗与现代设计结合的路径，促进其活化利用。
@@ -368,10 +419,14 @@
             </div>
 
             <div class="project-card">
-                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/8A2BE2/ffffff?text=Cultural+Inheritance+-+Example+2')">
-                    <img src="https://via.placeholder.com/400x250/8A2BE2/ffffff?text=Example+8" alt="文化传承图片">
+                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/9b59b6/ffffff?text=Cultural+Inheritance+-+Example+2')">
+                    <img src="https://via.placeholder.com/400x250/9b59b6/ffffff?text=Example+8" alt="文化传承图片">
                 </div>
                 <div class="card-content">
+                    <div class="card-labels">
+                        <span class="project-label label-culture">文化传承与发展</span>
+                        <span class="project-label label-phase">第二期</span>
+                    </div>
                     <h3 class="card-title">文化空间营造与艺术引入</h3>
                     <p class="card-text">
                         设计并改造了村庄的公共文化空间，引入清华艺术学院的资源，定期举办文化艺术活动，丰富了村民的精神生活。
@@ -380,10 +435,14 @@
             </div>
 
             <div class="project-card">
-                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/8A2BE2/ffffff?text=Cultural+Inheritance+-+Example+3')">
-                    <img src="https://via.placeholder.com/400x250/8A2BE2/ffffff?text=Example+9" alt="文化传承图片">
+                <div class="card-image" onclick="openLightbox('https://via.placeholder.com/800x600/9b59b6/ffffff?text=Cultural+Inheritance+-+Example+3')">
+                    <img src="https://via.placeholder.com/400x250/9b59b6/ffffff?text=Example+9" alt="文化传承图片">
                 </div>
                 <div class="card-content">
+                    <div class="card-labels">
+                        <span class="project-label label-culture">文化传承与发展</span>
+                        <span class="project-label label-phase">第三期</span>
+                    </div>
                     <h3 class="card-title">红色文化教育基地建设</h3>
                     <p class="card-text">
                         结合当地红色历史，协助打造教育研学基地，传承革命精神，为乡村旅游和文化教育提供了重要载体。
@@ -413,18 +472,6 @@
 </div>
 
 <script>
-    // 平滑滚动 (CSS 中的 scroll-behavior: smooth 已经设置，这里仅为兼容性或特定需求准备)
-    // const links = document.querySelectorAll('a[href^="#"]');
-    // for (const link of links) {
-    //     link.addEventListener('click', function(e) {
-    //         e.preventDefault();
-    //         const targetId = this.getAttribute('href');
-    //         document.querySelector(targetId).scrollIntoView({
-    //             behavior: 'smooth'
-    //         });
-    //     });
-    // }
-
     // Lightbox 交互 (图片点击放大)
     function openLightbox(src) {
         const modal = document.getElementById("lightboxModal");
